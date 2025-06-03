@@ -1,0 +1,44 @@
+.gradle
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+
+# Android Studio dosyaları ve yapılandırmaları
+*.iml
+*.iws
+*.ipr
+.idea/
+
+# Yapı çıktıları
+bin/
+gen/
+out/
+build/
+.gradle/
+
+# OS X dosyaları
+.DS_Store
+.svn/
+
+# Android Studio Navigation Editor geçici dosyaları
+.navigation/
+
+# Android Studio Profiler geçici dosyaları
+captures/
+
+# Diğer geçici dosyalar
+*.tmp
+*.bak
+*.swp
+*.class
+*.dex
+*.log
+*.abb

@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.nyth.app";
+option java_outer_classname = "HealthProto";
+option objc_class_prefix = "GRT";
+
+package services;
+
+service Health {
+  rpc SetBluetoothData (stream BluetoothData) returns (stream BluetoothDataResponse);
+}
+
+message BluetoothData {
+  string Id = 1;
+  string Ip = 2;
+  string Time = 3;
+  string TempL = 4;
+  string TempR = 5;
+  string HumL = 6;
+  string HumR = 7;
+  string HR = 8;
+  string oxy = 9;
+  string ax = 10;
+  string ay = 11;
+  string az = 12;
+  string gx = 13;
+  string gz = 14;
+  string Min = 15;
+  string Sec = 16;
+  string IMUStatus = 17;
+  string HRStatus = 18;
+  string SYSStatus = 19;
+  string SampleT = 20;
+  string breath = 21;
+  string ecg = 22;
+  string ActivityId = 23;
+}
+
+message BluetoothDataResponse {
+  string message = 1;
+}
