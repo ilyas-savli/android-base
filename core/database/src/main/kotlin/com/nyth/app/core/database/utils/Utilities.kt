@@ -1,7 +1,7 @@
 package com.nyth.app.core.database.utils
 
-import com.google.gson.Gson
-import com.nyth.app.core.model.ext.StringExt.toStringOrNull
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import timber.log.Timber
 
 /**
@@ -9,21 +9,20 @@ import timber.log.Timber
  * @param value to object which send via reified
  */
 inline fun <reified T> convertToObject(value: String): T? = try {
-    with(value) {
-        when (T::class) {
-            Boolean::class -> toBoolean() as T
-            Float::class -> toFloat() as T
-            Int::class -> toInt() as T
-            Long::class -> toLong() as T
-            Double::class -> toDouble() as T
-            String::class -> toString() as T
-            else -> {
-                Gson().fromJson(this, T::class.java)
-            }
+    when (T::class) {
+        Boolean::class -> value.toBoolean() as T
+        Float::class -> value.toFloat() as T
+        Int::class -> value.toInt() as T
+        Long::class -> value.toLong() as T
+        Double::class -> value.toDouble() as T
+        String::class -> value as T
+        else -> {
+            val json = Json { ignoreUnknownKeys = true }
+            json.decodeFromString<T>(value)
         }
     }
 } catch (e: Exception) {
-    Timber.e(e.message.toString())
+    Timber.e(e.message ?: "Deserialization error")
     null
 }
 
@@ -32,12 +31,11 @@ inline fun <reified T> convertToObject(value: String): T? = try {
  * @param value type [T] to [String]
  */
 inline fun <reified T> convertToString(value: T): String? = try {
-    with(value) {
-        when (T::class) {
-            Boolean::class, Float::class, Int::class, Long::class, Double::class, String::class -> toStringOrNull()
-            else -> {
-                Gson().toJson(value, T::class.java)
-            }
+    when (T::class) {
+        Boolean::class, Float::class, Int::class, Long::class, Double::class, String::class -> value.toString()
+        else -> {
+            val json = Json { ignoreUnknownKeys = true }
+            json.encodeToString(value)
         }
     }
 } catch (e: Exception) {

@@ -1,7 +1,7 @@
 package com.nyth.app.core.network.utils
 
 import com.auth0.android.jwt.JWT
-import com.nyth.app.core.model.utils.JsonSerializer.toObject
+import com.nyth.app.core.database.utils.convertToObject
 
 /**
  * Converting JWT To Object
@@ -9,7 +9,7 @@ import com.nyth.app.core.model.utils.JsonSerializer.toObject
 object JwtParser {
     inline fun <reified T> JWT.toAuthObject(): T? {
         val arr = this.claims.map {
-            kotlin.String.format("\"%s\":\"%s\"", it.key, it.value.asString())
+            String.format("\"%s\":\"%s\"", it.key, it.value.asString())
         }
         val json = buildString {
             append("{")
@@ -17,7 +17,7 @@ object JwtParser {
             append("}")
         }
 
-        val result = json.toObject<T>()
+        val result = convertToObject<T>(json)
         return result
     }
 }

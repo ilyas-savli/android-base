@@ -1,23 +1,22 @@
 package com.nyth.app.core.model.local
 
-import com.google.gson.annotations.SerializedName
 import com.squareup.moshi.Json
 
 data class AuthModel(
     val token: String?,
 
-    @SerializedName("user_id")
+    @Json(name = "user_id")
     val userId: String?,
 
-    @SerializedName("first_name")
+    @Json(name = "first_name")
     val firstName: String?,
 
-    @SerializedName("last_name")
+    @Json(name = "last_name")
     val lastName: String?,
 
-    @SerializedName("email")
+    @Json(name = "email")
     val email: String?,
 
-    @SerializedName("type")
+    @Json(name = "type")
     val type: String?
 )

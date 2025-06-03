@@ -6,9 +6,6 @@ import com.nyth.app.core.database.EncryptedDataStoreManager
 import com.nyth.app.core.database.sharedpref.SharedPreferenceManager
 import com.nyth.app.core.network.BuildConfig
 import com.nyth.app.core.network.interceptor.ApiRequestInterceptor
-import com.nyth.app.core.network.service.ContentService
-import com.nyth.app.core.network.service.IdentityService
-import com.nyth.app.core.network.service.ListingService
 import com.nyth.app.core.network.service.PrayService
 import com.nyth.app.core.network.service.RefreshTokenService
 import com.nyth.app.core.network.utils.AuthManager
@@ -97,43 +94,6 @@ object NetworkModule {
             refreshTokenService = refreshTokenService,
             authManager = authManager
         )
-
-    /**
-     * identity service
-     */
-    @Provides
-    @Singleton
-    fun provideIdentityService(okHttpClient: OkHttpClient, moshi: Moshi): IdentityService =
-        Retrofit.Builder()
-            .client(okHttpClient)
-            .baseUrl(BuildConfig.IDENTITY_BASE_URL)
-            .addConverterFactory(MoshiConverterFactory.create(moshi)).build()
-            .create(IdentityService::class.java)
-
-    /**
-     * content service
-     */
-    @Provides
-    @Singleton
-    fun provideContentService(okHttpClient: OkHttpClient, moshi: Moshi): ContentService =
-        Retrofit.Builder()
-            .client(okHttpClient)
-            .baseUrl(BuildConfig.CONTENT_BASE_URL)
-            .addConverterFactory(MoshiConverterFactory.create(moshi)).build()
-            .create(ContentService::class.java)
-
-
-    /**
-     * listing service
-     */
-    @Provides
-    @Singleton
-    fun provideListingService(okHttpClient: OkHttpClient, moshi: Moshi): ListingService =
-        Retrofit.Builder()
-            .client(okHttpClient)
-            .baseUrl(BuildConfig.LISTING_BASE_URL)
-            .addConverterFactory(MoshiConverterFactory.create(moshi)).build()
-            .create(ListingService::class.java)
 
     /**
      * refreshToken service

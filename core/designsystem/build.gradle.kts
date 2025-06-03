@@ -64,9 +64,6 @@ dependencies {
     api(libs.androidx.compose.ui.util)
     api(libs.androidx.core.core)
 
-    // balloon
-    api(libs.stack.ui.balloon)
-
     debugApi(libs.androidx.compose.ui.tooling)
 
     api(libs.coil.kt.compose)
@@ -88,11 +85,4 @@ dependencies {
     api(libs.androidx.navigation.dynamic) {
         exclude(group = "com.google.android.play", module = "feature-delivery")
     }
-
-    //exoplayer
-    implementation(libs.stack.android.exoplayer)
-
-    //youtubeplayer
-    implementation (libs.stack.youtube.player)
-    implementation (libs.stack.youtube.player.custom.ui)
 }

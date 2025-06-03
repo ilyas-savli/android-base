@@ -62,16 +62,10 @@ dependencies {
     // moshi
     implementation(libs.stack.moshi.kotlin)
 
-    //exoplayer
-    implementation(libs.stack.android.exoplayer)
-
     // timber
     api(libs.stack.timber)
 
     api(libs.stack.kotlinx.serialization.json)
-
-    // gson
-    implementation(libs.gson)
 }
 
 fun LibraryBuildType.stringField(entry: Pair<String, String>) {

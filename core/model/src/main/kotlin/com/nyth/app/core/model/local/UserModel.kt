@@ -1,23 +1,23 @@
 package com.nyth.app.core.model.local
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 
 data class UserModel(
-    @SerializedName("user_id")
+    @Json(name = "user_id")
     val userId: String? = null,
 
-    @SerializedName("first_name")
+    @Json(name = "first_name")
     val firstName: String? = null,
 
-    @SerializedName("last_name")
+    @Json(name = "last_name")
     val lastName: String? = null,
 
-    @SerializedName("email")
+    @Json(name = "email")
     val email: String? = null,
 
-    @SerializedName("type")
+    @Json(name = "type")
     val type: String? = null,
 
-    @SerializedName("profile_image_url")
+    @Json(name = "profile_image_url")
     val profileImageUrl: String? = null
 )

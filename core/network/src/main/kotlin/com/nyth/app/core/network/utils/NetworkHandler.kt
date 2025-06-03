@@ -3,12 +3,12 @@ package com.nyth.app.core.network.utils
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import com.nyth.app.core.database.utils.convertToObject
 import com.nyth.app.core.model.ext.StringExt.empty
 import com.nyth.app.core.model.local.enums.NetworkErrorType
 import com.nyth.app.core.model.remote.network.Resource
 import com.nyth.app.core.model.remote.response.ErrorResponse
 import com.nyth.app.core.model.remote.response.ErrorStringResponse
-import com.nyth.app.core.model.utils.JsonSerializer.toObject
 import com.nyth.app.core.network.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -101,8 +101,8 @@ class NetworkHandler @Inject constructor(
             val errorResponse: ErrorResponse = if (!hasInternet()) {
                 ErrorResponse(success = false, errorType = NetworkErrorType.NoInternet)
             } else {
-                errorBodyString.toObject<ErrorResponse>()
-                    ?: errorBodyString.toObject<ErrorStringResponse>()?.let {
+                convertToObject<ErrorResponse>(errorBodyString)
+                    ?: convertToObject<ErrorStringResponse>(errorBodyString)?.let {
                         ErrorResponse(
                             success = false,
                             errorType = NetworkErrorType.UnExpected,

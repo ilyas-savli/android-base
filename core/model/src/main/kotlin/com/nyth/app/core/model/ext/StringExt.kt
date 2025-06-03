@@ -1,8 +1,6 @@
 package com.nyth.app.core.model.ext
 
 import android.text.Html
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.nyth.app.core.model.local.Screen
 import com.nyth.app.core.model.utils.AppConstants.Companion.PHONE_MASK
 import com.nyth.app.core.model.utils.AppConstants.Companion.PHONE_MASK_CHAR
@@ -298,20 +296,6 @@ object StringExt {
         } catch (e: Exception) {
             null
         }
-    }
-
-    inline fun <reified T> String.fromJson(): T? {
-        return try {
-            val type = object : TypeToken<T>() {}.type
-            Gson().fromJson<T>(this, type)
-        } catch (e: Exception) {
-            null
-        }
-    }
-
-    fun String.thousandSeparator(): String {
-        val regex = "(\\d)(?=(\\d{3})+\$)".toRegex()
-        return this.replace(regex, "\$1.")
     }
 
     fun String.getScreen(): Screen {

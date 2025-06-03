@@ -49,19 +49,8 @@ dependencies {
     implementation(coreDesignSystem())
     implementation(coreDatabase())
 
-    // camerax
-    api(libs.androidx.camera.core)
-    api(libs.androidx.camera.camera2)
-    api(libs.androidx.camera.lifecycle)
-    api(libs.androidx.camera.video)
-    api(libs.androidx.camera.view)
-    api(libs.androidx.camera.extensions)
-
     //animation
     implementation(libs.androidx.compose.animation)
-
-    //exoplayer
-    implementation(libs.stack.android.exoplayer)
 
     // hilt
     implementation(libs.stack.hilt.android)

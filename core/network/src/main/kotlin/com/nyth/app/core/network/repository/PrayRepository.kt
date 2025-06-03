@@ -23,5 +23,4 @@ class PrayRepository @Inject constructor(
             )
         }
     ).flowOn(ioDispatcher)
-
 }
