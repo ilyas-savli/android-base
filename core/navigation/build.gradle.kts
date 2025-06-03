@@ -6,6 +6,7 @@ import ModuleDependency.Project.coreModel
 plugins {
     alias(libs.plugins.stack.android.library)
     alias(libs.plugins.stack.kotlin.android)
+    alias(libs.plugins.compose.compiler)
     alias(libs.plugins.stack.kotlin.parcelize)
     alias(libs.plugins.stack.ksp)
 }

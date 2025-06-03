@@ -5,6 +5,7 @@ import ModuleDependency.Project.coreNetwork
 plugins {
     alias(libs.plugins.stack.android.library)
     alias(libs.plugins.stack.kotlin.android)
+    alias(libs.plugins.compose.compiler)
     alias(libs.plugins.stack.kotlin.kapt)
     alias(libs.plugins.stack.kotlin.parcelize)
 }
@@ -62,7 +63,7 @@ dependencies {
     api(libs.androidx.compose.runtime)
     api(libs.androidx.compose.ui.tooling.preview)
     api(libs.androidx.compose.ui.util)
-    api(libs.androidx.core.core)
+    api(libs.androidx.core.ktx)
 
     debugApi(libs.androidx.compose.ui.tooling)
 

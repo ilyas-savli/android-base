@@ -1,5 +1,4 @@
-@file:Suppress("UnstableApiUsage")
-
+import com.google.firebase.appdistribution.gradle.firebaseAppDistribution
 import ModuleDependency.Project.coreDatabase
 import ModuleDependency.Project.coreDesignSystem
 import ModuleDependency.Project.coreNetwork
@@ -14,6 +13,7 @@ plugins {
     alias(libs.plugins.stack.kotlin.parcelize)
     alias(libs.plugins.stack.hilt.plugin)
     alias(libs.plugins.stack.kotlin.android)
+    alias(libs.plugins.compose.compiler)
     alias(libs.plugins.stack.googleService)
     alias(libs.plugins.stack.crashlytics)
     alias(libs.plugins.stack.firebase.app.distribution)
