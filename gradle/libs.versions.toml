@@ -7,7 +7,7 @@ coreKtx = "1.16.0"
 ksp = "2.1.21-2.0.1"
 
 # androidx
-navigation = "2.8.0-alpha08"
+navigation = "2.9.0"
 room = "2.5.2"
 data-store = "1.0.0"
 paging = "3.3.0"
@@ -34,13 +34,13 @@ timber = "5.0.1"
 firebaseGradle = "3.0.2"
 firebasePerf = "1.4.2"
 firebaseAppDistribution = "5.0.0"
-firebaseBom = "33.1.0"
-googleService = "4.3.10"
-gmsAuth = "20.4.1"
-runtimeAndroid = "1.6.7"
+firebaseBom = "33.14.0"
+googleService = "4.4.2"
+gmsAuth = "21.3.0"
+runtimeAndroid = "1.8.2"
 
 jsoup = "1.17.2"
-startupRuntime = "1.1.1"
+startupRuntime = "1.2.0"
 
 [libraries]
 # androidx
