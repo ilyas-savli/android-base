@@ -1,7 +1,6 @@
 package com.nyth.app.feature.auth.screens.splash.domain
 
 import androidx.lifecycle.viewModelScope
-import com.nyth.app.core.database.EncryptedDataStoreManager
 import com.nyth.app.core.designsystem.platform.viewmodel.BaseViewModel
 import com.nyth.app.core.model.local.enums.UiState
 import com.nyth.app.core.network.utils.AuthManager
@@ -12,7 +11,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SplashScreenViewModel @Inject constructor(
-    private val dataStore: EncryptedDataStoreManager,
     private val authManager: AuthManager
 ) : BaseViewModel<SplashScreenState, SplashScreenAction>(SplashScreenState()) {
 

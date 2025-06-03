@@ -49,17 +49,16 @@ class SharedPreferenceManager @Inject constructor(context: Context) {
     inline operator fun <reified T : Any> get(
         key: String,
         defaultValue: T? = null
-    ): T? =
-        when (T::class) {
-            String::class -> prefs.getString(
-                key,
-                defaultValue as String? ?: String.empty
-            ) as T?
+    ): T? = when (T::class) {
+        String::class -> prefs.getString(
+            key,
+            defaultValue as String? ?: String.empty
+        ) as T?
 
-            Int::class -> prefs.getInt(key, defaultValue as? Int ?: -1) as T
-            Boolean::class -> prefs.getBoolean(key, defaultValue as? Boolean ?: false) as T
-            Float::class -> prefs.getFloat(key, defaultValue as? Float ?: -1f) as T
-            Long::class -> prefs.getLong(key, defaultValue as? Long ?: -1) as T
-            else -> throw UnsupportedOperationException("Not yet implemented")
-        }
+        Int::class -> prefs.getInt(key, defaultValue as? Int ?: -1) as T
+        Boolean::class -> prefs.getBoolean(key, defaultValue as? Boolean ?: false) as T
+        Float::class -> prefs.getFloat(key, defaultValue as? Float ?: -1f) as T
+        Long::class -> prefs.getLong(key, defaultValue as? Long ?: -1) as T
+        else -> throw UnsupportedOperationException("Not yet implemented")
+    }
 }

@@ -2,10 +2,8 @@ package com.nyth.app.core.network.di
 
 import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerInterceptor
-import com.nyth.app.core.database.EncryptedDataStoreManager
 import com.nyth.app.core.database.sharedpref.SharedPreferenceManager
 import com.nyth.app.core.network.BuildConfig
-import com.nyth.app.core.network.interceptor.ApiRequestInterceptor
 import com.nyth.app.core.network.service.PrayService
 import com.nyth.app.core.network.service.RefreshTokenService
 import com.nyth.app.core.network.utils.AuthManager
@@ -50,10 +48,8 @@ object NetworkModule {
     @Singleton
     fun provideOkHttpClient(
         chuckerInterceptor: ChuckerInterceptor,
-        apiRequestInterceptor: ApiRequestInterceptor
     ): OkHttpClient =
         OkHttpClient.Builder()
-            .addInterceptor(apiRequestInterceptor)
             .addInterceptor(chuckerInterceptor)
             .addInterceptor(provideLoggingInterceptor())
             .callTimeout(DEFAULT_CALL_TIMEOUT_MILLIS, TimeUnit.MILLISECONDS)
@@ -78,22 +74,6 @@ object NetworkModule {
     fun provideChuckerInterceptor(@ApplicationContext context: Context): ChuckerInterceptor =
         ChuckerInterceptor.Builder(context)
             .build()
-
-    /**
-     * api request interceptor
-     */
-    @Singleton
-    @Provides
-    fun provideApiRequestInterceptor(
-        dataStore: EncryptedDataStoreManager,
-        refreshTokenService: RefreshTokenService,
-        authManager: AuthManager
-    ): ApiRequestInterceptor =
-        ApiRequestInterceptor(
-            dataStore = dataStore,
-            refreshTokenService = refreshTokenService,
-            authManager = authManager
-        )
 
     /**
      * refreshToken service
