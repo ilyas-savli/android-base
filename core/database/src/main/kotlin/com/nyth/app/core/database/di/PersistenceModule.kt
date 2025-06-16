@@ -26,7 +26,7 @@ object PersistenceModule {
     fun provideAppDatabase(
         application: Application
     ): AppDatabase = Room.databaseBuilder(application, AppDatabase::class.java, "App.db")
-        .fallbackToDestructiveMigration(false).build()
+        .fallbackToDestructiveMigration().build()
 
     @Provides
     @Singleton

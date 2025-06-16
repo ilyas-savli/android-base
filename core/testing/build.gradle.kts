@@ -5,9 +5,8 @@ import java.util.Properties
 plugins {
     alias(libs.plugins.stack.android.library)
     alias(libs.plugins.stack.kotlin.android)
-    alias(libs.plugins.stack.kotlin.parcelize)
-    alias(libs.plugins.stack.kotlin.kapt)
     alias(libs.plugins.stack.hilt.plugin)
+    alias(libs.plugins.stack.kotlin.kapt)
     alias(libs.plugins.stack.kotlin.serialization)
     alias(libs.plugins.stack.ksp)
 }

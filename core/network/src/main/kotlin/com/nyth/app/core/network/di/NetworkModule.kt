@@ -5,7 +5,6 @@ import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.nyth.app.core.database.sharedpref.SharedPreferenceManager
 import com.nyth.app.core.network.BuildConfig
 import com.nyth.app.core.network.service.PrayService
-import com.nyth.app.core.network.service.RefreshTokenService
 import com.nyth.app.core.network.utils.AuthManager
 import com.nyth.app.core.network.utils.DEFAULT_CALL_TIMEOUT_MILLIS
 import com.nyth.app.core.network.utils.DEFAULT_CONNECT_TIMEOUT_MILLIS
@@ -74,31 +73,6 @@ object NetworkModule {
     fun provideChuckerInterceptor(@ApplicationContext context: Context): ChuckerInterceptor =
         ChuckerInterceptor.Builder(context)
             .build()
-
-    /**
-     * refreshToken service
-     */
-    @Provides
-    @Singleton
-    fun provideRefreshTokenService(
-        moshi: Moshi,
-        chuckerInterceptor: ChuckerInterceptor
-    ): RefreshTokenService =
-        Retrofit.Builder()
-            .client(
-                OkHttpClient.Builder()
-                    .addInterceptor(chuckerInterceptor)
-                    .addInterceptor(provideLoggingInterceptor())
-                    .callTimeout(DEFAULT_CALL_TIMEOUT_MILLIS, TimeUnit.MILLISECONDS)
-                    .connectTimeout(DEFAULT_CONNECT_TIMEOUT_MILLIS, TimeUnit.MILLISECONDS)
-                    .readTimeout(DEFAULT_READ_TIMEOUT_MILLIS, TimeUnit.MILLISECONDS)
-                    .writeTimeout(DEFAULT_WRITE_TIMEOUT_MILLIS, TimeUnit.MILLISECONDS)
-                    .build()
-            )
-            .baseUrl(BuildConfig.IDENTITY_BASE_URL)
-            .addConverterFactory(MoshiConverterFactory.create(moshi)).build()
-            .create(RefreshTokenService::class.java)
-
 
     @Provides
     @Singleton

@@ -5,13 +5,13 @@ import java.util.Properties
 plugins {
     alias(libs.plugins.stack.android.application)
     alias(libs.plugins.stack.kotlin.kapt)
-    alias(libs.plugins.stack.kotlin.parcelize)
     alias(libs.plugins.stack.hilt.plugin)
     alias(libs.plugins.stack.kotlin.android)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.stack.googleService)
     alias(libs.plugins.stack.crashlytics)
     alias(libs.plugins.stack.firebase.app.distribution)
+    alias(libs.plugins.stack.ksp)
 }
 
 // Load local.properties
@@ -64,18 +64,6 @@ android {
         }
 
         flavorDimensions += AppConfig.flavorDimension
-
-        /**
-         *
-         * Can distribute the release app from terminal via typing
-         * For PROD Release Version -> gradle assembleRelease appDistributionUploadProdRelease
-         * For STAGE Release Version -> gradle assembleRelease appDistributionUploadStageRelease
-         * For Stage Debug Version -> gradle assembleDebug appDistributionUploadStageDebug
-         */
-        firebaseAppDistribution {
-            artifactType = "APK"
-            groups = "testers"
-        }
     }
 
     buildTypes {
@@ -197,10 +185,6 @@ dependencies {
     implementation(libs.androidx.splash.screen)
 
     debugImplementation(libs.stack.leakcanary)
-}
-
-kapt {
-    correctErrorTypes = true
 }
 
 fun ApplicationProductFlavor.stringField(entry: Pair<String, String>) {

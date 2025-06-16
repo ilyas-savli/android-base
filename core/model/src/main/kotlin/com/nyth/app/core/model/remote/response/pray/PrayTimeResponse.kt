@@ -47,12 +47,12 @@ data class PrayTimeResponse(
 
 
 data class PrayTimeUiModel(
-    var prayTimes : ArrayList<PrayTimeItemUiModel>? = arrayListOf(),
+    var prayTimes: ArrayList<PrayTimeItemUiModel>? = arrayListOf(),
     val qiblaDirection: String?,
 )
 
 data class PrayTimeItemUiModel(
-    var timeName : String?,
+    var timeName: String?,
     val time: String?,
 )
 
@@ -76,10 +76,28 @@ fun PrayTimeResponse.toUiModel(): PrayTimeUiModel {
 
     val prayTimeList = arrayListOf<PrayTimeItemUiModel>().apply {
         firstItem?.fajr?.let { convertTime(it)?.let { t -> add(PrayTimeItemUiModel("İmsak", t)) } }
-        firstItem?.shurooq?.let { convertTime(it)?.let { t -> add(PrayTimeItemUiModel("Sabah", t)) } }
+        firstItem?.shurooq?.let {
+            convertTime(it)?.let { t ->
+                add(
+                    PrayTimeItemUiModel(
+                        "Sabah",
+                        t
+                    )
+                )
+            }
+        }
         firstItem?.dhuhr?.let { convertTime(it)?.let { t -> add(PrayTimeItemUiModel("Öğle", t)) } }
         firstItem?.asr?.let { convertTime(it)?.let { t -> add(PrayTimeItemUiModel("İkindi", t)) } }
-        firstItem?.maghrib?.let { convertTime(it)?.let { t -> add(PrayTimeItemUiModel("Akşam", t)) } }
+        firstItem?.maghrib?.let {
+            convertTime(it)?.let { t ->
+                add(
+                    PrayTimeItemUiModel(
+                        "Akşam",
+                        t
+                    )
+                )
+            }
+        }
         firstItem?.isha?.let { convertTime(it)?.let { t -> add(PrayTimeItemUiModel("Yatsı", t)) } }
     }
 

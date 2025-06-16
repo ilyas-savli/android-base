@@ -7,7 +7,7 @@ plugins {
     alias(libs.plugins.stack.android.library)
     alias(libs.plugins.stack.kotlin.android)
     alias(libs.plugins.compose.compiler)
-    alias(libs.plugins.stack.kotlin.parcelize)
+    alias(libs.plugins.stack.kotlin.kapt)
     alias(libs.plugins.stack.kotlin.serialization)
     alias(libs.plugins.stack.ksp)
 }
@@ -57,8 +57,9 @@ dependencies {
     // room
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.room.runtime)
+    kapt(libs.androidx.room.compiler)
+
     implementation(libs.androidx.runtime.android)
-    ksp(libs.androidx.room.compiler)
 
     // moshi
     implementation(libs.stack.moshi.kotlin)
