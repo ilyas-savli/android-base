@@ -24,6 +24,7 @@ dependencyResolutionManagement {
 rootProject.name = "androidbase"
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 // app
 include(":app")
 
