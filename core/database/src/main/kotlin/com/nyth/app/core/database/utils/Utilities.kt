@@ -1,5 +1,10 @@
 package com.nyth.app.core.database.utils
 
+import android.content.SharedPreferences
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
+import kotlinx.coroutines.flow.first
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import timber.log.Timber
@@ -41,4 +46,35 @@ inline fun <reified T> convertToString(value: T): String? = try {
 } catch (e: Exception) {
     Timber.e(e)
     null
+}
+
+fun SharedPreferences.Editor.putEncryptedString(key: String, value: String?) {
+    val encrypted = EncryptionSerializer.encrypt(value)
+    putString(key, encrypted).apply()
+}
+
+fun SharedPreferences.getEncryptedString(key: String, default: String? = null): String? {
+    val encrypted = getString(key, null) ?: return default
+    return try {
+        EncryptionSerializer.decrypt(encrypted)
+    } catch (e: Exception) {
+        Timber.e(e)
+        default
+    }
+}
+
+suspend fun DataStore<Preferences>.putEncryptedString(key: Preferences.Key<String>, value: String) {
+    val encrypted = EncryptionSerializer.encrypt(value)
+    edit { it[key] = encrypted }
+}
+
+suspend fun DataStore<Preferences>.getEncryptedString(key: Preferences.Key<String>): String? {
+    val prefs = data.first()
+    val encrypted = prefs[key] ?: return null
+    return try {
+        EncryptionSerializer.decrypt(encrypted)
+    } catch (e: Exception) {
+        Timber.e(e)
+        null
+    }
 }
