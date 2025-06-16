@@ -2,134 +2,14 @@
 <resources>
     <!--module names and nav item labels-->
     <string name="app_name">androidbase</string>
-    <string name="home_page">Vakitler</string>
-    <string name="qibla">Kıble</string>
+    <string name="home_page">Ana Sayfa</string>
+    <string name="search">Ara</string>
     <string name="settings">Ayarlar</string>
 
-    <string name="support">Destek</string>
-    <string name="privacy_policy">Gizlilik Politikası</string>
-    <string name="location">Konum</string>
-
     <string name="default_content_description">nyth</string>
-    <string name="hide_password">Hide Password</string>
-    <string name="show_password">Show Password</string>
-    <string name="require">(Required)</string>
-    <string name="confirm">Onayla</string>
-    <string name="continue_button">Devam Et</string>
-    <string name="or">veya</string>
-
-    <string name="year">Yıl</string>
-    <string name="maximum_value_error">En fazla "%s".</string>
-    <string name="minimum_value_error">En az "%s".</string>
-    <string name="invalid_number">Geçersiz değer.</string>
-    <string name="required_field">Bu alan gerekli.</string>
-    <string name="wrong_email_address">Email adresi yanlış.</string>
-    <string name="please_check_advert_price">Lütfen İlan Fiyatını Kontrol Ediniz.</string>
-    <string name="please_check_advert_name">Lütfen İlan Adını Kontrol Ediniz.</string>
-    <string name="please_check_issue_title">Lütfen Konu Başlığını Kontrol Ediniz.</string>
-    <string name="please_check_account_firstname">Lütfen Ad Alanını Kontrol Ediniz.</string>
-    <string name="please_check_account_username">Lütfen Kullanıcı Adı Alanını Kontrol Ediniz.</string>
-    <string name="please_check_account_lastname">Lütfen Soyad Alanını Kontrol Ediniz.</string>
-    <string name="please_check_issue_desc">Lütfen Konu Açıklamasını Kontrol Ediniz.</string>
-    <string name="confirmation_code">Onay Kodu</string>
-    <string name="send_again">Yeniden Gönder</string>
-    <string name="otp_description">%1s adresine gönderilen 6 haneli tek seferlik onay kodunu aşağıdaki alana giriniz.</string>
-    <string name="month_year">Ay / Yıl</string>
-    <string name="cvc">CVC</string>
-
-    <string name="payment_date_error">Son kullanma tarihi eksik yada hatalı</string>
-    <string name="payment_cvv_error">Güvenlik kodu eksik yada hatalı</string>
-
-    <string name="wrong_phone_number">Telefon numarası yanlış.</string>
-    <string name="general_error_message">Bir hata ile karşılaştık. Tekrar deneyiniz..</string>
 
     <string name="create_post">Gönderi Oluştur</string>
     <string name="you_joined_the_community">Topluluğa Katıldın</string>
-    <string name="empy_card_name_error">Ad Soyad boş olamaz </string>
     <string name="selected">Seçildi</string>
-
-    <string-array name="turkey_cities">
-        <item>Adana</item>
-        <item>Adıyaman</item>
-        <item>Afyonkarahisar</item>
-        <item>Ağrı</item>
-        <item>Amasya</item>
-        <item>Ankara</item>
-        <item>Antalya</item>
-        <item>Artvin</item>
-        <item>Aydın</item>
-        <item>Balıkesir</item>
-        <item>Bilecik</item>
-        <item>Bingöl</item>
-        <item>Bitlis</item>
-        <item>Bolu</item>
-        <item>Burdur</item>
-        <item>Bursa</item>
-        <item>Çanakkale</item>
-        <item>Çankırı</item>
-        <item>Çorum</item>
-        <item>Denizli</item>
-        <item>Diyarbakır</item>
-        <item>Edirne</item>
-        <item>Elazığ</item>
-        <item>Erzincan</item>
-        <item>Erzurum</item>
-        <item>Eskişehir</item>
-        <item>Gaziantep</item>
-        <item>Giresun</item>
-        <item>Gümüşhane</item>
-        <item>Hakkâri</item>
-        <item>Hatay</item>
-        <item>Isparta</item>
-        <item>Mersin</item>
-        <item>İstanbul</item>
-        <item>İzmir</item>
-        <item>Kars</item>
-        <item>Kastamonu</item>
-        <item>Kayseri</item>
-        <item>Kırklareli</item>
-        <item>Kırşehir</item>
-        <item>Kocaeli</item>
-        <item>Konya</item>
-        <item>Kütahya</item>
-        <item>Malatya</item>
-        <item>Manisa</item>
-        <item>Kahramanmaraş</item>
-        <item>Mardin</item>
-        <item>Muğla</item>
-        <item>Muş</item>
-        <item>Nevşehir</item>
-        <item>Niğde</item>
-        <item>Ordu</item>
-        <item>Rize</item>
-        <item>Sakarya</item>
-        <item>Samsun</item>
-        <item>Siirt</item>
-        <item>Sinop</item>
-        <item>Sivas</item>
-        <item>Tekirdağ</item>
-        <item>Tokat</item>
-        <item>Trabzon</item>
-        <item>Tunceli</item>
-        <item>Şanlıurfa</item>
-        <item>Uşak</item>
-        <item>Van</item>
-        <item>Yozgat</item>
-        <item>Zonguldak</item>
-        <item>Aksaray</item>
-        <item>Bayburt</item>
-        <item>Karaman</item>
-        <item>Kırıkkale</item>
-        <item>Batman</item>
-        <item>Şırnak</item>
-        <item>Bartın</item>
-        <item>Ardahan</item>
-        <item>Iğdır</item>
-        <item>Yalova</item>
-        <item>Karabük</item>
-        <item>Kilis</item>
-        <item>Osmaniye</item>
-        <item>Düzce</item>
-    </string-array>
 
 </resources>

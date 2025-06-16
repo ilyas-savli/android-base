@@ -2,21 +2,20 @@ package com.nyth.app.core.designsystem.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import com.nyth.app.core.designsystem.theme.customColorsPalette
+import com.nyth.app.core.designsystem.theme.LocalColorsPalette
 
 @Composable
 fun CustomCircularProgress(
     modifier: Modifier = Modifier,
     progress: Float? = null,
-    fullColor: Color = MaterialTheme.customColorsPalette.primary400,
-    trackColor: Color = MaterialTheme.customColorsPalette.primary100,
-    completedColor: Color = MaterialTheme.customColorsPalette.success,
-    unCompletedColor: Color = MaterialTheme.customColorsPalette.primary100,
+    fullColor: Color = LocalColorsPalette.current.green400,
+    trackColor: Color = LocalColorsPalette.current.green400,
+    completedColor: Color = LocalColorsPalette.current.gray100,
+    unCompletedColor: Color = LocalColorsPalette.current.black26,
 ) {
     if (progress != null) {
         CircularProgressIndicator(
@@ -40,8 +39,8 @@ private fun PreviewComponent() {
     Column {
         CustomCircularProgress(
             progress = 0.5f,
-            trackColor = MaterialTheme.customColorsPalette.primary600,
-            fullColor = MaterialTheme.customColorsPalette.primary100
+            trackColor = LocalColorsPalette.current.disabledColor,
+            fullColor = LocalColorsPalette.current.inputHintColor
         )
         CustomCircularProgress()
         CustomCircularProgress(progress = 0.5f)

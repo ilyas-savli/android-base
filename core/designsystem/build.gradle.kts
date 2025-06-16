@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.stack.android.library)
     alias(libs.plugins.stack.kotlin.android)
     alias(libs.plugins.compose.compiler)
-    alias(libs.plugins.stack.kotlin.kapt)
+    alias(libs.plugins.stack.kotlin.serialization)
     alias(libs.plugins.stack.ksp)
 }
 
@@ -55,11 +55,12 @@ dependencies {
     api(libs.androidx.compose.ui.util)
     api(libs.androidx.core.ktx)
 
-    debugApi(libs.androidx.compose.ui.tooling)
+    // navigation3
+    api(libs.androidx.navigation3.runtime)
+    api(libs.androidx.navigation3.ui)
+    api(libs.androidx.navigation3.lifecycle)
 
-    api(libs.coil.kt.compose)
-    api(libs.coil.kt.video)
-    api(libs.coil.kt.svg)
+    debugApi(libs.androidx.compose.ui.tooling)
 
     api(libs.stack.kotlin.reflect)
     // system bars customization
@@ -70,6 +71,8 @@ dependencies {
 
     // lifecycle compose
     api(libs.androidx.lifecycle.compose)
+
+    api(libs.bundles.coil)
 
     // navigation
     api(libs.androidx.navigation.compose)

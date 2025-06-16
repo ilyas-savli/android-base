@@ -8,7 +8,6 @@ object AppConfig {
     const val namespaceModel = "com.nyth.app.core.model"
     const val namespaceNetwork = "com.nyth.app.core.network"
     const val namespaceDatabase = "com.nyth.app.core.database"
-    const val namespaceNavigation = "com.nyth.app.core.navigation"
     const val namespaceDesignSystem = "com.nyth.app.core.designsystem"
 
     const val namespaceTesting = "com.nyth.app.core.testing"
@@ -26,9 +25,9 @@ object AppConfig {
     const val versionCode = 1
 
     // sdk configs
-    const val compileSdk = 35
+    const val compileSdk = 36
     const val minSdk = 26
-    const val targetSdk = 35
+    const val targetSdk = 36
 
     const val testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 

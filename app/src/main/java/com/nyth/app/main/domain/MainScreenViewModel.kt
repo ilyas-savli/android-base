@@ -1,5 +1,7 @@
 package com.nyth.app.main.domain
 
+import androidx.compose.runtime.mutableStateListOf
+import com.nyth.app.core.designsystem.platform.navigation.Screen
 import com.nyth.app.core.designsystem.platform.viewmodel.BaseViewModel
 import com.nyth.app.core.model.local.enums.UiState
 import com.nyth.app.core.network.utils.AuthManager
@@ -12,6 +14,8 @@ class MainScreenViewModel @Inject constructor(
 ) : BaseViewModel<MainScreenState, MainScreenAction>(
     MainScreenState()
 ) {
+    val backStack = mutableStateListOf<Screen>(Screen.Splash)
+
     override fun onReduceState(viewAction: MainScreenAction): MainScreenState? =
         when (viewAction) {
             is MainScreenAction.OnFailure -> {
@@ -30,13 +34,5 @@ class MainScreenViewModel @Inject constructor(
                 uiState = UiState.SUCCESS,
                 isUserLoggedIn = viewAction.isUserLoggedIn
             )
-
-            MainScreenAction.GetUserInfo -> {
-                null
-            }
-
-            MainScreenAction.ListenOnErrors -> {
-                state.copy(errorMessage = "Deneme")
-            }
         }
 }

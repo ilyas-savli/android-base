@@ -91,6 +91,8 @@ dependencies {
     // paging
     api(libs.androidx.paging.compose)
     api(libs.androidx.paging.runtime)
+
+    implementation(libs.bundles.coil)
 }
 
 fun LibraryBuildType.stringField(entry: Pair<String, String>) {

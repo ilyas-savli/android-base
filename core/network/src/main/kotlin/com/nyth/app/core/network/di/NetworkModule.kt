@@ -4,7 +4,7 @@ import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.nyth.app.core.database.sharedpref.SharedPreferenceManager
 import com.nyth.app.core.network.BuildConfig
-import com.nyth.app.core.network.service.PrayService
+import com.nyth.app.core.network.service.UserService
 import com.nyth.app.core.network.utils.AuthManager
 import com.nyth.app.core.network.utils.DEFAULT_CALL_TIMEOUT_MILLIS
 import com.nyth.app.core.network.utils.DEFAULT_CONNECT_TIMEOUT_MILLIS
@@ -76,12 +76,12 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun providePrayService(okHttpClient: OkHttpClient, moshi: Moshi): PrayService =
+    fun providePrayService(okHttpClient: OkHttpClient, moshi: Moshi): UserService =
         Retrofit.Builder()
             .client(okHttpClient)
             .baseUrl(BuildConfig.PRAY_BASE_URL)
             .addConverterFactory(MoshiConverterFactory.create(moshi)).build()
-            .create(PrayService::class.java)
+            .create(UserService::class.java)
 
     /**
      * AuthManager

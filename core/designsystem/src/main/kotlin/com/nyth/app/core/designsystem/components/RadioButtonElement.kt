@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.nyth.app.core.designsystem.theme.customColorsPalette
+import com.nyth.app.core.designsystem.theme.LocalColorsPalette
 
 @Composable
 fun CustomRadioButton(
@@ -30,7 +30,7 @@ fun CustomRadioButton(
         onClick = { onSelectedChange?.invoke(!selected) },
         enabled = enabled,
         colors = RadioButtonDefaults.colors(
-            selectedColor = selectedColor ?: MaterialTheme.customColorsPalette.primary100,
+            selectedColor = selectedColor ?: LocalColorsPalette.current.greenLive,
             unselectedColor = unselectedColor
                 ?: MaterialTheme.colorScheme.secondaryContainer,
             disabledSelectedColor = disabledSelectedColor ?: MaterialTheme.colorScheme.primary,

@@ -30,8 +30,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.nyth.app.core.designsystem.R
-import com.nyth.app.core.designsystem.theme.customColorsPalette
-import com.nyth.app.core.designsystem.theme.typographyNunito
+import com.nyth.app.core.designsystem.theme.LocalColorsPalette
+import com.nyth.app.core.designsystem.theme.StablexTypography
 import com.nyth.app.core.model.ext.StringExt.empty
 
 @Composable
@@ -47,7 +47,7 @@ fun CustomButton(
     icon: Painter = painterResource(id = R.drawable.ic_arrow_up),
     borderColor: Color = Color.Transparent,
     borderSize: Dp = 3.dp,
-    containerColor: Color = MaterialTheme.customColorsPalette.secondary100,
+    containerColor: Color = LocalColorsPalette.current.searchBarVerticalDividerColor,
     textColor: Color? = null,
     shape: Shape = (RoundedCornerShape(3.dp)),
     enabled: Boolean = true,
@@ -139,6 +139,7 @@ fun CustomButton(
 @Preview
 @Composable
 fun ButtonPreview() {
+    val localColorsPalette = LocalColorsPalette.current
     Column {
         CustomButton(
             modifier = Modifier
@@ -183,7 +184,7 @@ fun ButtonPreview() {
         Spacer(modifier = Modifier.width(8.dp))
         CustomButton(
             text = "Button",
-            textColor = MaterialTheme.customColorsPalette.secondary300,
+            textColor = localColorsPalette.green50,
             containerColor = Color.LightGray,
         )
         Row(
@@ -197,12 +198,12 @@ fun ButtonPreview() {
                     .fillMaxWidth()
                     .weight(1f),
                 text = stringResource(id = R.string.create_post),
-                textStyle = typographyNunito.mediumSecondary300S14L20,
-                containerColor = MaterialTheme.customColorsPalette.white,
-                borderColor = MaterialTheme.customColorsPalette.secondary200,
+                textStyle = StablexTypography.mulish300,
+                containerColor = localColorsPalette.white,
+                borderColor = localColorsPalette.blackDefault,
                 borderSize = 1.dp,
                 leftIcon = painterResource(id = R.drawable.ic_add_white),
-                leftIconTint = MaterialTheme.customColorsPalette.secondary300,
+                leftIconTint = localColorsPalette.black26,
                 onClick = {}
             )
             CustomButton(
@@ -210,10 +211,10 @@ fun ButtonPreview() {
                     .fillMaxWidth()
                     .weight(1f),
                 text = stringResource(id = R.string.you_joined_the_community),
-                textStyle = typographyNunito.mediumWhiteS14L17,
+                textStyle = StablexTypography.mulish700,
                 rightIcon = painterResource(id = R.drawable.ic_arrow_down),
-                rightIconTint = MaterialTheme.customColorsPalette.white,
-                containerColor = MaterialTheme.customColorsPalette.secondary100,
+                rightIconTint = localColorsPalette.white,
+                containerColor = localColorsPalette.searchBarVerticalDividerColor,
                 onClick = {}
             )
         }

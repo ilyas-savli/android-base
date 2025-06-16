@@ -11,14 +11,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.nyth.app.core.designsystem.theme.customColorsPalette
+import com.nyth.app.core.designsystem.theme.LocalColorsPalette
 import com.nyth.app.core.model.local.enums.UiState
 
 @Composable
 fun DefaultLoadingProgress(
     modifier: Modifier = Modifier
         .fillMaxSize()
-        .background(color = MaterialTheme.customColorsPalette.white),
+        .background(color = LocalColorsPalette.current.white),
     uiState: UiState
 ) {
     if (uiState == UiState.LOADING) {
