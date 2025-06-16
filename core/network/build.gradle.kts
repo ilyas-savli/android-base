@@ -1,5 +1,3 @@
-import ModuleDependency.Project.coreDatabase
-import ModuleDependency.Project.coreModel
 import com.android.build.api.dsl.LibraryBuildType
 import java.util.Properties
 
@@ -65,8 +63,8 @@ android {
 }
 
 dependencies {
-    implementation(coreModel())
-    implementation(coreDatabase())
+    implementation(projects.core.model)
+    implementation(projects.core.database)
 
     implementation(libs.stack.okhttp.interceptor)
 

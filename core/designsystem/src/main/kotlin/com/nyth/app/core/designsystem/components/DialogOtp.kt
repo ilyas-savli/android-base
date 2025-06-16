@@ -175,17 +175,6 @@ fun DialogOtp(
                         text = otpInfoText,
                         style = typographyNunito.regularNeutral500S12H30
                     )
-                    Spacer(modifier = Modifier.height(20.dp))
-                    OTPTextField(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 24.dp),
-                        value = otpCode.value,
-                        length = 6
-                    ) {
-                        otpCode.value = it
-                        isOtpFilled.value = it.length == 6
-                    }
                     Spacer(modifier = Modifier.height(12.dp))
                     CustomButton(
                         modifier = Modifier

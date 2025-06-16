@@ -1,4 +1,4 @@
-package com.nyth.app.core.database.testing.di
+package com.nyth.app.core.testing.di
 
 import dagger.Module
 import dagger.Provides

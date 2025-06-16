@@ -1,25 +1,27 @@
 import com.android.build.api.dsl.LibraryBuildType
+import java.util.Properties
 
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     alias(libs.plugins.stack.android.library)
     alias(libs.plugins.stack.kotlin.android)
-    alias(libs.plugins.compose.compiler)
     alias(libs.plugins.stack.kotlin.parcelize)
     alias(libs.plugins.stack.kotlin.kapt)
     alias(libs.plugins.stack.hilt.plugin)
+    alias(libs.plugins.stack.kotlin.serialization)
     alias(libs.plugins.stack.ksp)
 }
 
+val localProperties = Properties().apply {
+    rootProject.file("local.properties").inputStream().use { load(it) }
+}
+
 android {
-    namespace = AppConfig.namespaceListing
+    namespace = AppConfig.namespaceTesting
 
     compileSdk = AppConfig.compileSdk
 
-    buildFeatures {
-        compose = true
-        buildConfig = true
-    }
+    buildFeatures.buildConfig = true
 
     defaultConfig {
         minSdk = AppConfig.minSdk
@@ -38,27 +40,22 @@ android {
     kotlinOptions {
         jvmTarget = AppConfig.jvmTarget
     }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = AppConfig.composeCompiler
-    }
 }
 
 dependencies {
-    implementation(projects.core.designsystem)
-    implementation(projects.core.database)
+    api(libs.kotlinx.coroutines.test)
+    api(projects.core.model)
 
-    //animation
-    implementation(libs.androidx.compose.animation)
+    implementation(libs.androidx.test.rules)
+    implementation(libs.hilt.android.testing)
 
     // hilt
     implementation(libs.stack.hilt.android)
     kapt(libs.stack.hilt.compiler)
 
-    implementation(libs.auth.googleService)
-
-    //Jsoup
-    implementation(libs.jsoup)
+    // test
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.turbine)
 }
 
 fun LibraryBuildType.stringField(entry: Pair<String, String>) {

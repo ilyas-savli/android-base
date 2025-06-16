@@ -11,6 +11,8 @@ object AppConfig {
     const val namespaceNavigation = "com.nyth.app.core.navigation"
     const val namespaceDesignSystem = "com.nyth.app.core.designsystem"
 
+    const val namespaceTesting = "com.nyth.app.core.testing"
+
     // namespace feature modules
     const val namespaceAuth = "com.nyth.app.feature.auth"
     const val namespaceListing = "com.nyth.app.feature.listing"

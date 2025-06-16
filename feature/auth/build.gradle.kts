@@ -1,5 +1,3 @@
-import ModuleDependency.Project.coreDatabase
-import ModuleDependency.Project.coreDesignSystem
 import com.android.build.api.dsl.LibraryBuildType
 
 @Suppress("DSL_SCOPE_VIOLATION")
@@ -25,10 +23,10 @@ android {
 
     buildTypes {
         debug {
-            stringField(Field.SERVER_CLIENT_ID to "264597081142-jq4fc5i9ml21up9jm7v7ce77bvvk0iuj.apps.googleusercontent.com")
+            stringField(Field.SERVER_CLIENT_ID to "")
         }
         release {
-            stringField(Field.SERVER_CLIENT_ID to "264597081142-jq4fc5i9ml21up9jm7v7ce77bvvk0iuj.apps.googleusercontent.com")
+            stringField(Field.SERVER_CLIENT_ID to "")
         }
     }
 
@@ -56,8 +54,8 @@ android {
 }
 
 dependencies {
-    implementation(coreDesignSystem())
-    implementation(coreDatabase())
+    implementation(projects.core.designsystem)
+    implementation(projects.core.database)
 
     // hilt
     implementation(libs.stack.hilt.android)

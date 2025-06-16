@@ -1,6 +1,3 @@
-import ModuleDependency.Project.coreModel
-import ModuleDependency.Project.coreNetwork
-
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     alias(libs.plugins.stack.android.library)
@@ -30,13 +27,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    buildTypes {
-        debug {
-        }
-        release {
-        }
-    }
-
     kotlinOptions {
         jvmTarget = AppConfig.jvmTarget
     }
@@ -50,8 +40,8 @@ android {
 }
 
 dependencies {
-    api(coreModel())
-    api(coreNetwork())
+    api(projects.core.model)
+    api(projects.core.network)
 
     // ui
     api(libs.androidx.compose.foundation)

@@ -1,7 +1,4 @@
 @file:Suppress("UnstableApiUsage")
-
-import ModuleDependency.Project.coreModel
-
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     alias(libs.plugins.stack.android.library)
@@ -37,7 +34,7 @@ android {
 }
 
 dependencies {
-    implementation(coreModel())
+    implementation(projects.core.model)
 
     // navigation
     api(libs.androidx.navigation.compose)

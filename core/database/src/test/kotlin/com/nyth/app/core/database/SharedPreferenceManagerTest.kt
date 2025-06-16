@@ -3,7 +3,7 @@ package com.nyth.app.core.database
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
 import com.nyth.app.core.database.sharedpref.SharedPreferenceManager
-import kotlinx.serialization.Serializable
+import com.nyth.app.core.testing.data.DummyObject
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Before
@@ -16,9 +16,6 @@ class SharedPreferenceManagerTest {
 
     private lateinit var context: Context
     private lateinit var sharedPrefManager: SharedPreferenceManager
-
-    @Serializable
-    data class DummyObject(val name: String, val age: Int)
 
     @Before
     fun setup() {

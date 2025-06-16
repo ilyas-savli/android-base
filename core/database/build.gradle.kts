@@ -1,5 +1,3 @@
-import ModuleDependency.Project.coreModel
-
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     alias(libs.plugins.stack.android.library)
@@ -37,7 +35,7 @@ android {
 }
 
 dependencies {
-    implementation(coreModel())
+    implementation(projects.core.model)
 
     implementation(libs.androidx.data.store)
 
@@ -49,7 +47,10 @@ dependencies {
     implementation(libs.stack.hilt.android)
     kapt(libs.stack.hilt.compiler)
 
+
     // test
+    testImplementation(projects.core.testing)
+
     testImplementation(libs.robolectric)
     testImplementation(libs.junit)
 

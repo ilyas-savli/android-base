@@ -1,10 +1,5 @@
-import com.google.firebase.appdistribution.gradle.firebaseAppDistribution
-import ModuleDependency.Project.coreDatabase
-import ModuleDependency.Project.coreDesignSystem
-import ModuleDependency.Project.coreNetwork
-import ModuleDependency.Project.featureAuth
-import ModuleDependency.Project.featureListing
 import com.android.build.api.dsl.ApplicationProductFlavor
+import com.google.firebase.appdistribution.gradle.firebaseAppDistribution
 import java.util.Properties
 
 plugins {
@@ -172,13 +167,13 @@ android {
 
 dependencies {
     // core modules
-    implementation(coreDatabase())
-    implementation(coreDesignSystem())
-    implementation(coreNetwork())
+    implementation(projects.core.database)
+    implementation(projects.core.designsystem)
+    implementation(projects.core.network)
 
     // feature modules
-    implementation(featureAuth())
-    implementation(featureListing())
+    implementation(projects.feature.auth)
+    implementation(projects.feature.home)
 
     // hilt
     implementation(libs.stack.hilt.android)

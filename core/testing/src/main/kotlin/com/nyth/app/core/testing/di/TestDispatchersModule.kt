@@ -1,6 +1,8 @@
-package com.nyth.app.core.database.testing.di
+package com.nyth.app.core.testing.di
 
-import com.nyth.app.core.database.testing.network.di.DispatchersModule
+import com.nyth.app.core.testing.AppDispatchers
+import com.nyth.app.core.testing.Dispatcher
+import com.nyth.app.core.testing.network.di.DispatchersModule
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.components.SingletonComponent
