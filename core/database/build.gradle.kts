@@ -39,10 +39,7 @@ android {
 dependencies {
     implementation(coreModel())
 
-    implementation(libs.stack.tink)
     implementation(libs.androidx.data.store)
-
-    implementation(libs.androidx.security.crypto)
 
     // room
     implementation(libs.androidx.room.ktx)

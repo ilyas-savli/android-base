@@ -16,11 +16,10 @@ flowrow = "1.8.2"
 animation = "1.8.2"
 composeTooling = "1.8.2"
 
-coil = "2.6.0"
+coil = "2.7.0"
 moshi = "1.15.1"
 
 leakcanary = "2.13"
-tink = "1.7.0"
 
 coroutines = "1.10.1"
 chucker = "4.1.0"
@@ -29,13 +28,13 @@ okhttp = "4.12.0"
 
 retrofit = "2.11.0"
 
-hilt = "2.51.1"
+hilt = "2.56"
 timber = "5.0.1"
 
-firebaseGradle = "3.0.3"
+firebaseGradle = "3.0.4"
 firebasePerf = "1.4.2"
 firebaseAppDistribution = "5.1.1"
-firebaseBom = "33.14.0"
+firebaseBom = "33.15.0"
 googleService = "4.4.2"
 gmsAuth = "21.3.0"
 runtimeAndroid = "1.8.2"
@@ -44,7 +43,7 @@ jsoup = "1.17.2"
 startupRuntime = "1.2.0"
 
 # test
-robolectric = "4.10.3"
+robolectric = "4.14.1"
 junit = "4.13.2"
 kotlinxCoroutines = "1.10.1"
 androidxTestRules = "1.6.1"
@@ -54,8 +53,6 @@ androidxTestRules = "1.6.1"
 # androidx
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation" }
 androidx-navigation-dynamic = { module = "androidx.navigation:navigation-dynamic-features-fragment", version.ref = "navigation" }
-
-androidx-security-crypto = "androidx.security:security-crypto-ktx:1.1.0-alpha07"
 
 # paging
 androidx-paging-compose = { module = "androidx.paging:paging-compose", version.ref = "paging" }
@@ -89,7 +86,7 @@ coil-kt-svg = { group = "io.coil-kt", name = "coil-svg", version.ref = "coil" }
 coil-kt-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 coil-kt-video = { group = "io.coil-kt", name = "coil-video", version.ref = "coil" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version = "1.2.0" }
-androidx-lifecycle-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version = "2.9.0" }
+androidx-lifecycle-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version = "2.9.1" }
 
 # stack
 
@@ -125,8 +122,6 @@ stack-firebase-iid = { module = "com.google.firebase:firebase-iid", version = "2
 stack-timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 
 stack-leakcanary = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakcanary" }
-
-stack-tink = { module = "com.google.crypto.tink:tink-android", version.ref = "tink" }
 
 auth-googleService = { module = "com.google.android.gms:play-services-auth", version.ref = "gmsAuth" }
 stack-google-location = { module = "com.google.android.gms:play-services-location", version = "21.3.0" }
