@@ -19,27 +19,36 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.nyth.app.core.designsystem.R
 import com.nyth.app.core.designsystem.components.CustomCircularProgress
+import com.nyth.app.core.designsystem.navigation.Screen
 import com.nyth.app.core.designsystem.theme.LocalColorsPalette
 import com.nyth.app.core.designsystem.theme.StablexTypography
 import kotlinx.coroutines.delay
 
 @Composable
-fun SplashScreenRoot(
-    navNext: () -> Unit
+fun SplashScreenRoute(
+    navNext: (Screen) -> Unit
 ) {
-    SplashScreen(navNext = navNext)
+    val viewModel = hiltViewModel<SplashScreenViewModel>()
+
+    SplashScreen(navNext = navNext, isUserLoggedIn = viewModel.checkUserLoggedIn())
 }
 
 @Composable
 private fun SplashScreen(
-    navNext: () -> Unit,
+    navNext: (Screen) -> Unit,
+    isUserLoggedIn: Boolean
 ) {
     LaunchedEffect(Unit) {
         delay(1500)
-        navNext()
+        if (isUserLoggedIn) {
+            navNext(Screen.NestedGraph)
+        } else {
+            navNext(Screen.Login)
+        }
     }
 
     val systemUiController = rememberSystemUiController()
@@ -71,6 +80,6 @@ private fun SplashScreen(
 @Composable
 private fun ScreenPreview() {
     SplashScreen(
-        navNext = {}
+        navNext = {}, isUserLoggedIn = true
     )
 }

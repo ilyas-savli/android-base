@@ -29,16 +29,17 @@ import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberSavedStateNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 import com.nyth.app.core.designsystem.R
-import com.nyth.app.core.designsystem.platform.navigation.BottomBarScreen
-import com.nyth.app.core.designsystem.platform.navigation.BottomBarScreenSaver
-import com.nyth.app.core.designsystem.platform.navigation.bottomBarItems
-import com.nyth.app.feature.home.screens.bottombar.dashboard.DashboardScreenRoot
-import com.nyth.app.feature.home.screens.bottombar.search.SearchScreenRoot
-import com.nyth.app.feature.home.screens.bottombar.settings.SettingsScreenRoot
+import com.nyth.app.core.designsystem.navigation.BottomBarScreen
+import com.nyth.app.core.designsystem.navigation.BottomBarScreenSaver
+import com.nyth.app.core.designsystem.navigation.Screen
+import com.nyth.app.core.designsystem.navigation.bottomBarItems
+import com.nyth.app.feature.home.screens.bottombar.dashboard.DashboardScreenRoute
+import com.nyth.app.feature.home.screens.bottombar.search.SearchScreenRoute
+import com.nyth.app.feature.home.screens.bottombar.settings.SettingsScreenRoute
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NestedGraph() {
+fun NestedGraph(navToNext: (Screen) -> Unit, popUntil: (Screen) -> Unit) {
     val backstack = remember { mutableStateListOf<BottomBarScreen>(BottomBarScreen.Home) }
 
     var currentBottomBarScreen: BottomBarScreen by rememberSaveable(stateSaver = BottomBarScreenSaver) {
@@ -97,16 +98,22 @@ fun NestedGraph() {
                 rememberViewModelStoreNavEntryDecorator()
             ), entryProvider = entryProvider {
                 entry<BottomBarScreen.Home> {
-                    DashboardScreenRoot()
+                    DashboardScreenRoute(onBack = {
+                        backstack.removeLastOrNull()
+                    }, navToNext = navToNext)
                 }
                 entry<BottomBarScreen.Search> {
                     // To preserve the state of the composable (should use rememberSaveable for variables)
                     stateHolder.SaveableStateProvider(key = "Search") {
-                        SearchScreenRoot()
+                        SearchScreenRoute(onBack = {
+                            backstack.removeLastOrNull()
+                        }, navToNext = navToNext)
                     }
                 }
                 entry<BottomBarScreen.Settings> {
-                    SettingsScreenRoot()
+                    SettingsScreenRoute(onBack = {
+                        backstack.removeLastOrNull()
+                    }, navToNext = navToNext, popUntil = popUntil)
                 }
             })
     }

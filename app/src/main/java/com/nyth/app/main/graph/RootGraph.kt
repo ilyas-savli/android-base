@@ -10,9 +10,10 @@ import androidx.navigation3.runtime.entry
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberSavedStateNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
-import com.nyth.app.core.designsystem.platform.navigation.Screen
-import com.nyth.app.feature.auth.screens.splash.SplashScreenRoot
-import com.nyth.app.feature.auth.screens.splash.domain.SplashScreenViewModel
+import com.nyth.app.core.designsystem.ext.popUntil
+import com.nyth.app.core.designsystem.navigation.Screen
+import com.nyth.app.feature.auth.screens.login.LoginScreenRoute
+import com.nyth.app.feature.auth.screens.splash.SplashScreenRoute
 import com.nyth.app.main.domain.MainScreenViewModel
 
 @Composable
@@ -28,20 +29,33 @@ fun RootGraph() {
             rememberSavedStateNavEntryDecorator(), rememberViewModelStoreNavEntryDecorator()
         ), entryProvider = entryProvider {
             entry<Screen.Splash> {
-                val viewModel = hiltViewModel<SplashScreenViewModel>()
-                SplashScreenRoot(
+                SplashScreenRoute(
                     navNext = {
-                        backstack.add(Screen.NestedGraph)
+                        backstack.add(it)
+                    })
+            }
+
+            entry<Screen.Login> {
+                LoginScreenRoute(
+                    onBack = {
+                        backstack.removeLastOrNull()
+                    },
+                    navNext = {
+                        backstack.add(it)
                     })
             }
 
             entry<Screen.NestedGraph> {
-                NestedGraph()
+                NestedGraph(navToNext = {
+                    backstack.add(it)
+                }, popUntil = { popScreen ->
+                    backstack.popUntil(popScreen)
+                })
             }
         })
 }
 
-@Preview(showSystemUi = true)
+@Preview(showBackground = true)
 @Composable
 private fun PreviewScreen() {
     RootGraph()

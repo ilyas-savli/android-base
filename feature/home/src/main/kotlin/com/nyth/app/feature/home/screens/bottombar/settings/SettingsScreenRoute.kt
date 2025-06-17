@@ -9,40 +9,42 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.nyth.app.core.designsystem.platform.navigation.Screen
+import com.nyth.app.core.designsystem.components.CustomButton
+import com.nyth.app.core.designsystem.navigation.Screen
 import com.nyth.app.feature.home.screens.bottombar.settings.domain.SettingsScreenViewModel
 
 @Composable
-fun SettingsScreenRoot(onBack: () -> Unit = {}, navToNext: (Screen) -> Unit = {}) {
+fun SettingsScreenRoute(
+    onBack: () -> Unit, navToNext: (Screen) -> Unit, popUntil: (Screen) -> Unit
+) {
     val viewModel: SettingsScreenViewModel = hiltViewModel()
 
     SettingsScreen(
-        onChangeSelectedCity = { selectedCity ->
-            viewModel.changeSelectedCity(selectedCity = selectedCity)
-        },
-        onBack = onBack,
-        navToNext = navToNext
+        onBack = onBack, navToNext = navToNext, logoutUser = {
+            viewModel.logoutUser()
+            popUntil(Screen.Login)
+        }
     )
 }
 
 @Composable
 private fun SettingsScreen(
-    onChangeSelectedCity: (String) -> Unit = {},
-    onBack: () -> Unit = {},
-    navToNext: (Screen) -> Unit = {}
+    onBack: () -> Unit,
+    navToNext: (Screen) -> Unit,
+    logoutUser: () -> Unit
 ) {
     Column(
-        modifier = Modifier
-            .fillMaxSize(),
+        modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text("Settings")
+        CustomButton(text = "Logout", onClick = logoutUser)
     }
 }
 
 @Preview(showBackground = true)
 @Composable
 private fun PreviewScreen() {
-    SettingsScreen()
+    SettingsScreen(onBack = {}, navToNext = {}, logoutUser = {})
 }

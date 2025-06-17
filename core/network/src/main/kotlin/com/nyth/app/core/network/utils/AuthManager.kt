@@ -20,4 +20,12 @@ class AuthManager @Inject constructor(
                 null
             }
         }
+
+    fun login(token: String) {
+        sharedPref.accessToken = token
+    }
+
+    fun logout() {
+        sharedPref.accessToken = null
+    }
 }

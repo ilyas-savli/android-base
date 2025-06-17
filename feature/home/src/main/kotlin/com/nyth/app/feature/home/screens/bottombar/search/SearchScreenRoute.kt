@@ -7,28 +7,37 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.nyth.app.core.designsystem.navigation.Screen
 import com.nyth.app.feature.home.screens.bottombar.search.domain.SearchScreenViewModel
 
 @Composable
-fun SearchScreenRoot() {
+fun SearchScreenRoute(
+    onBack: () -> Unit, navToNext: (Screen) -> Unit
+) {
     val viewModel: SearchScreenViewModel = hiltViewModel()
 
     SearchScreen(
-        viewModel = viewModel
+        onBack = onBack, navToNext = navToNext
     )
 }
 
 @Composable
 private fun SearchScreen(
-    viewModel: SearchScreenViewModel
+    onBack: () -> Unit, navToNext: (Screen) -> Unit
 ) {
     Column(
-        modifier = Modifier
-            .fillMaxSize(),
+        modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text("Search")
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun PreviewScreen() {
+    SearchScreen(onBack = {}, navToNext = {})
 }

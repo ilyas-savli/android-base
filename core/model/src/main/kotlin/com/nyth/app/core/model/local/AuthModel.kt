@@ -1,22 +1,21 @@
 package com.nyth.app.core.model.local
 
 import com.squareup.moshi.Json
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class AuthModel(
-    val token: String?,
+    val token: String? = null,
 
-    @Json(name = "user_id")
-    val userId: String?,
+    @Json(name = "name")
+    val name: String? = null,
 
-    @Json(name = "first_name")
-    val firstName: String?,
+    @Json(name = "sub")
+    val sub: String? = null,
 
-    @Json(name = "last_name")
-    val lastName: String?,
+    @Json(name = "admin")
+    val admin: Boolean? = null,
 
-    @Json(name = "email")
-    val email: String?,
-
-    @Json(name = "type")
-    val type: String?
+    @Json(name = "iat")
+    val iat: Long? = null
 )

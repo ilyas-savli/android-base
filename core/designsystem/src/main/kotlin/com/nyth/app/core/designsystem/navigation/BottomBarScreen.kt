@@ -1,4 +1,4 @@
-package com.nyth.app.core.designsystem.platform.navigation
+package com.nyth.app.core.designsystem.navigation
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
