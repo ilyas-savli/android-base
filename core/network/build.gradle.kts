@@ -11,10 +11,6 @@ plugins {
     alias(libs.plugins.stack.ksp)
 }
 
-val localProperties = Properties().apply {
-    rootProject.file("local.properties").inputStream().use { load(it) }
-}
-
 android {
     namespace = AppConfig.namespaceNetwork
 
@@ -34,21 +30,10 @@ android {
 
     buildTypes {
         debug {
-            stringField(Field.IDENTITY_BASE_URL to "https://stage-androidbase.com/")
-            stringField(Field.LISTING_BASE_URL to "https://stage-androidbase.com/")
-            stringField(Field.CONTENT_BASE_URL to "https://stage-androidbase.com/")
             stringField(Field.PRAY_BASE_URL to "https://muslimsalat.com/")
-            val debugApiKey = localProperties.getProperty("NETWORK_API_KEY") ?: ""
-            buildConfigField("String", "API_KEY", "\"$debugApiKey\"")
-
         }
         release {
-            stringField(Field.IDENTITY_BASE_URL to "https://stage-androidbase.com/")
-            stringField(Field.LISTING_BASE_URL to "https://stage-androidbase.com/")
-            stringField(Field.CONTENT_BASE_URL to "https://stage-androidbase.com/")
             stringField(Field.PRAY_BASE_URL to "https://muslimsalat.com/")
-            val debugApiKey = localProperties.getProperty("NETWORK_API_KEY") ?: ""
-            buildConfigField("String", "API_KEY", "\"$debugApiKey\"")
         }
     }
 

@@ -20,15 +20,6 @@ android {
         buildConfig = true
     }
 
-    buildTypes {
-        debug {
-            stringField(Field.SERVER_CLIENT_ID to "asdasd")
-        }
-        release {
-            stringField(Field.SERVER_CLIENT_ID to "asdasd")
-        }
-    }
-
     defaultConfig {
         minSdk = AppConfig.minSdk
     }

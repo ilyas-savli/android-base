@@ -9,18 +9,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.nyth.app.core.designsystem.platform.navigation.Screen
-import com.nyth.app.feature.home.screens.bottombar.settings.domain.SettingsScreenState
 import com.nyth.app.feature.home.screens.bottombar.settings.domain.SettingsScreenViewModel
 
 @Composable
 fun SettingsScreenRoot(onBack: () -> Unit = {}, navToNext: (Screen) -> Unit = {}) {
     val viewModel: SettingsScreenViewModel = hiltViewModel()
-    val state = viewModel.uiState.collectAsStateWithLifecycle().value
 
     SettingsScreen(
-        state = state,
         onChangeSelectedCity = { selectedCity ->
             viewModel.changeSelectedCity(selectedCity = selectedCity)
         },
@@ -31,7 +27,6 @@ fun SettingsScreenRoot(onBack: () -> Unit = {}, navToNext: (Screen) -> Unit = {}
 
 @Composable
 private fun SettingsScreen(
-    state: SettingsScreenState,
     onChangeSelectedCity: (String) -> Unit = {},
     onBack: () -> Unit = {},
     navToNext: (Screen) -> Unit = {}
@@ -46,9 +41,8 @@ private fun SettingsScreen(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun PreviewScreen() {
-    val state = SettingsScreenState()
-    SettingsScreen(state = state)
+    SettingsScreen()
 }

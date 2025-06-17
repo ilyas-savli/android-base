@@ -8,23 +8,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.nyth.app.feature.home.screens.bottombar.search.domain.SearchScreenState
 import com.nyth.app.feature.home.screens.bottombar.search.domain.SearchScreenViewModel
 
 @Composable
 fun SearchScreenRoot() {
     val viewModel: SearchScreenViewModel = hiltViewModel()
-    val state = viewModel.uiState.collectAsStateWithLifecycle().value
 
     SearchScreen(
-        viewModel = viewModel, state = state
+        viewModel = viewModel
     )
 }
 
 @Composable
 private fun SearchScreen(
-    viewModel: SearchScreenViewModel, state: SearchScreenState
+    viewModel: SearchScreenViewModel
 ) {
     Column(
         modifier = Modifier

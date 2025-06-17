@@ -24,26 +24,20 @@ import com.nyth.app.core.designsystem.R
 import com.nyth.app.core.designsystem.components.CustomCircularProgress
 import com.nyth.app.core.designsystem.theme.LocalColorsPalette
 import com.nyth.app.core.designsystem.theme.StablexTypography
-import com.nyth.app.feature.auth.screens.splash.domain.SplashScreenAction
-import com.nyth.app.feature.auth.screens.splash.domain.SplashScreenState
 import kotlinx.coroutines.delay
 
 @Composable
 fun SplashScreenRoot(
-    navNext: () -> Unit,
-    state: SplashScreenState,
-    onEvent: (SplashScreenAction) -> Unit
+    navNext: () -> Unit
 ) {
-    SplashScreen(navNext = navNext, state = state, onEvent = onEvent)
+    SplashScreen(navNext = navNext)
 }
 
 @Composable
 private fun SplashScreen(
     navNext: () -> Unit,
-    state: SplashScreenState,
-    onEvent: (SplashScreenAction) -> Unit
 ) {
-    LaunchedEffect(key1 = state) {
+    LaunchedEffect(Unit) {
         delay(1500)
         navNext()
     }
@@ -60,8 +54,7 @@ private fun SplashScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
-            modifier = Modifier
-                .size(290.dp),
+            modifier = Modifier.size(290.dp),
             painter = painterResource(id = R.drawable.ic_launcher_foreground),
             contentDescription = stringResource(
                 id = R.string.default_content_description
@@ -78,8 +71,6 @@ private fun SplashScreen(
 @Composable
 private fun ScreenPreview() {
     SplashScreen(
-        navNext = {},
-        state = SplashScreenState(),
-        onEvent = {}
+        navNext = {}
     )
 }

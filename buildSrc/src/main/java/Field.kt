@@ -1,9 +1,3 @@
 object Field {
-    const val IDENTITY_BASE_URL = "IDENTITY_BASE_URL"
-    const val LISTING_BASE_URL = "LISTING_BASE_URL"
-    const val SERVER_CLIENT_ID = "SERVER_CLIENT_ID"
-    const val CONTENT_BASE_URL = "CONTENT_BASE_URL"
-    const val WEB_BASE_URL = "WEB_BASE_URL"
-    const val PAYMENT_LISTEN_HOST = "PAYMENT_LISTEN_HOST"
     const val PRAY_BASE_URL = "PRAY_BASE_URL"
 }

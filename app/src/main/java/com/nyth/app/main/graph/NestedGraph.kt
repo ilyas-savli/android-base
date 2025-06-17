@@ -1,6 +1,8 @@
 package com.nyth.app.main.graph
 
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -47,42 +49,47 @@ fun NestedGraph() {
 
     val stateHolder = rememberSaveableStateHolder()
 
-    Scaffold(topBar = {
-        TopAppBar(title = { Text(text = "TopAppBar Title") }, actions = {
-            IconButton(onClick = {}) {
-                Icon(
-                    painterResource(id = R.drawable.ic_search),
-                    contentDescription = null
-                )
-            }
-        })
-    }, bottomBar = {
-        NavigationBar {
-            bottomBarItems.forEach { destination ->
-                NavigationBarItem(
-                    selected = currentBottomBarScreen == destination,
-                    onClick = {
-                        val last = backstack.lastOrNull()
-                        if (last != destination) {
-                            if (last in bottomBarItems) {
-                                backstack.remove(last)
-                            }
-                        }
-                        backstack.add(destination)
-                        currentBottomBarScreen = destination
-                    },
-                    icon = {
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                modifier = Modifier.statusBarsPadding(),
+                title = { Text(text = "TopAppBar Title") },
+                actions = {
+                    IconButton(onClick = {}) {
                         Icon(
-                            painter = painterResource(id = destination.icon),
-                            contentDescription = stringResource(id = destination.title)
+                            painterResource(id = R.drawable.ic_search),
+                            contentDescription = null
                         )
                     }
-                )
+                })
+        }, bottomBar = {
+            NavigationBar(modifier = Modifier.navigationBarsPadding()) {
+                bottomBarItems.forEach { destination ->
+                    NavigationBarItem(
+                        selected = currentBottomBarScreen == destination,
+                        onClick = {
+                            val last = backstack.lastOrNull()
+                            if (last != destination) {
+                                if (last in bottomBarItems) {
+                                    backstack.remove(last)
+                                }
+                            }
+                            backstack.add(destination)
+                            currentBottomBarScreen = destination
+                        },
+                        icon = {
+                            Icon(
+                                painter = painterResource(id = destination.icon),
+                                contentDescription = stringResource(id = destination.title)
+                            )
+                        }
+                    )
+                }
             }
-        }
-    }) {
+        }) {
         NavDisplay(
-            modifier = Modifier.padding(it),
+            modifier = Modifier
+                .padding(it),
             backStack = backstack, onBack = {
                 backstack.removeLastOrNull()
             }, entryDecorators = listOf(

@@ -8,23 +8,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.nyth.app.feature.home.screens.bottombar.dashboard.domain.DashboardScreenState
 import com.nyth.app.feature.home.screens.bottombar.dashboard.domain.DashboardScreenViewModel
 
 @Composable
 fun DashboardScreenRoot() {
     val viewModel: DashboardScreenViewModel = hiltViewModel()
-    val state = viewModel.uiState.collectAsStateWithLifecycle().value
 
     DashboardScreen(
-        viewModel = viewModel, state = state
+        viewModel = viewModel
     )
 }
 
 @Composable
 private fun DashboardScreen(
-    viewModel: DashboardScreenViewModel, state: DashboardScreenState
+    viewModel: DashboardScreenViewModel
 ) {
     Column(
         modifier = Modifier.fillMaxSize(),

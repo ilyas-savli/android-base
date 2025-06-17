@@ -1,6 +1,5 @@
 import com.android.build.api.dsl.ApplicationProductFlavor
 import com.google.firebase.appdistribution.gradle.firebaseAppDistribution
-import java.util.Properties
 
 plugins {
     alias(libs.plugins.stack.android.application)
@@ -14,16 +13,11 @@ plugins {
     alias(libs.plugins.stack.ksp)
 }
 
-// Load local.properties
-val localProperties = Properties().apply {
-    rootProject.file("local.properties").inputStream().use { load(it) }
-}
-
 android {
     namespace = AppConfig.namespaceApp
 
     signingConfigs {
-        getByName("debug") {
+        getByName(AppConfig.debug) {
             storeFile = file(AppConfig.demoJksFilePath)
             storePassword = AppConfig.storePassword
             keyAlias = AppConfig.keyAlias
@@ -51,7 +45,7 @@ android {
 
         versionCode = AppConfig.versionCode
 
-        versionName = localProperties.getProperty("VERSION_NAME") ?: AppConfig.versionName
+        versionName = AppConfig.versionName
 
         testInstrumentationRunner = AppConfig.testInstrumentationRunner
 
@@ -106,7 +100,7 @@ android {
             manifestPlaceholders["applicationIcon"] = AppConfig.prodIcon
             manifestPlaceholders["applicationRoundIcon"] = AppConfig.prodRoundIcon
 
-            versionName = localProperties.getProperty("VERSION_NAME") ?: AppConfig.versionName
+            versionName = AppConfig.versionName
         }
         create(AppConfig.stage) {
             dimension = AppConfig.flavorDimension
@@ -118,14 +112,13 @@ android {
             manifestPlaceholders["applicationIcon"] = AppConfig.stageIcon
             manifestPlaceholders["applicationRoundIcon"] = AppConfig.stageRoundIcon
 
-            versionName = localProperties.getProperty("VERSION_NAME") ?: AppConfig.stageVersionName
+            versionName = AppConfig.stageVersionName
         }
     }
 
     // Access properties
-    val targetFlavor: String = localProperties.getProperty("TARGET_FLAVOR") ?: AppConfig.stage
-    val targetBuildType: String =
-        localProperties.getProperty("TARGET_BUILD_TYPE") ?: AppConfig.debug
+    val targetFlavor: String = AppConfig.stage
+    val targetBuildType: String = AppConfig.debug
 
     androidComponents.beforeVariants { variant ->
         variant.enable =

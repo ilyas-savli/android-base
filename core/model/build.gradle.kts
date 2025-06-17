@@ -2,8 +2,7 @@
 
 import com.android.build.api.dsl.LibraryBuildType
 
-@Suppress("DSL_SCOPE_VIOLATION")
-plugins {
+@Suppress("DSL_SCOPE_VIOLATION") plugins {
     alias(libs.plugins.stack.android.library)
     alias(libs.plugins.stack.kotlin.android)
     alias(libs.plugins.compose.compiler)
@@ -32,13 +31,8 @@ android {
     }
 
     buildTypes {
-        debug {
-            stringField(Field.WEB_BASE_URL to "https://sm-web.androidbase.com/")
-            stringField(Field.PAYMENT_LISTEN_HOST to "sm-web.androidbase.com/")
-        }
+        debug {}
         release {
-            stringField(Field.WEB_BASE_URL to "https://sm-web.androidbase.com/")
-            stringField(Field.PAYMENT_LISTEN_HOST to "sm-web.androidbase.com/")
             consumerProguardFiles("consumer-rules.pro")
         }
     }
