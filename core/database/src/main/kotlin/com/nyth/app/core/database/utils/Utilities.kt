@@ -13,17 +13,17 @@ import timber.log.Timber
  * Converting String To Object
  * @param value to object which send via reified
  */
-inline fun <reified T> convertToObject(value: String): T? = try {
+inline fun <reified T> convertToObject(value: String?): T? = try {
     when (T::class) {
         Boolean::class -> value.toBoolean() as T
-        Float::class -> value.toFloat() as T
-        Int::class -> value.toInt() as T
-        Long::class -> value.toLong() as T
-        Double::class -> value.toDouble() as T
+        Float::class -> value?.toFloatOrNull() as T
+        Int::class -> value?.toIntOrNull() as T
+        Long::class -> value?.toLongOrNull() as T
+        Double::class -> value?.toDoubleOrNull() as T
         String::class -> value as T
         else -> {
             val json = Json { ignoreUnknownKeys = true }
-            json.decodeFromString<T>(value)
+            json.decodeFromString<T>(value.orEmpty())
         }
     }
 } catch (e: Exception) {

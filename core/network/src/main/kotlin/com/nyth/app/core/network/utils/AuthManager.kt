@@ -21,6 +21,10 @@ class AuthManager @Inject constructor(
             }
         }
 
+    fun isUserLoggedIn(): Boolean {
+        return currentUser != null
+    }
+
     fun login(token: String) {
         sharedPref.accessToken = token
     }

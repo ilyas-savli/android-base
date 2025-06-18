@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -20,34 +21,36 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.nyth.app.core.designsystem.R
 import com.nyth.app.core.designsystem.components.CustomCircularProgress
 import com.nyth.app.core.designsystem.navigation.Screen
 import com.nyth.app.core.designsystem.theme.LocalColorsPalette
 import com.nyth.app.core.designsystem.theme.StablexTypography
-import kotlinx.coroutines.delay
 
 @Composable
 fun SplashScreenRoute(
     navNext: (Screen) -> Unit
 ) {
-    val viewModel = hiltViewModel<SplashScreenViewModel>()
+    val viewModel: SplashScreenViewModel = hiltViewModel()
+    val splashUiState by viewModel.splashUiState.collectAsStateWithLifecycle()
 
-    SplashScreen(navNext = navNext, isUserLoggedIn = viewModel.checkUserLoggedIn())
+    SplashScreen(navNext = navNext, splashUiState = splashUiState)
 }
 
 @Composable
 private fun SplashScreen(
     navNext: (Screen) -> Unit,
-    isUserLoggedIn: Boolean
+    splashUiState: SplashUiState
 ) {
-    LaunchedEffect(Unit) {
-        delay(1500)
-        if (isUserLoggedIn) {
-            navNext(Screen.NestedGraph)
-        } else {
-            navNext(Screen.Login)
+    LaunchedEffect(key1 = splashUiState) {
+        if (splashUiState is SplashUiState.Success) {
+            if (splashUiState.isLoggedIn) {
+                navNext(Screen.NestedGraph)
+            } else {
+                navNext(Screen.Login)
+            }
         }
     }
 
@@ -72,7 +75,10 @@ private fun SplashScreen(
         )
         Text(text = stringResource(id = R.string.app_name), style = StablexTypography.mulish400)
         Spacer(modifier = Modifier.size(200.dp))
-        CustomCircularProgress()
+
+        if (splashUiState == SplashUiState.Loading) {
+            CustomCircularProgress()
+        }
     }
 }
 
@@ -80,6 +86,6 @@ private fun SplashScreen(
 @Composable
 private fun ScreenPreview() {
     SplashScreen(
-        navNext = {}, isUserLoggedIn = true
+        navNext = {}, splashUiState = SplashUiState.Loading
     )
 }

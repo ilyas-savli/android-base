@@ -100,7 +100,7 @@ fun NestedGraph(navToNext: (Screen) -> Unit, popUntil: (Screen) -> Unit) {
                 entry<BottomBarScreen.Home> {
                     DashboardScreenRoute(onBack = {
                         backstack.removeLastOrNull()
-                    }, navToNext = navToNext)
+                    }, navToNext = navToNext, popUntil = popUntil)
                 }
                 entry<BottomBarScreen.Search> {
                     // To preserve the state of the composable (should use rememberSaveable for variables)

@@ -1,26 +1,25 @@
 package com.nyth.app.core.network.repository
 
+import com.nyth.app.core.model.remote.network.NetworkResult
+import com.nyth.app.core.model.remote.response.pray.PrayTimeResponse
 import com.nyth.app.core.network.service.UserService
 import com.nyth.app.core.network.utils.NetworkHandler
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class UserRepository @Inject constructor(
     private val userService: UserService,
-    private val ioDispatcher: CoroutineDispatcher,
-    private val networkHandler: NetworkHandler,
+    private val networkHandler: NetworkHandler
 ) {
-    // region Course
     suspend fun getPrayTimes(
         key: String,
         city: String
-    ) = networkHandler.handleResponse(
-        request = {
+    ): Flow<NetworkResult<PrayTimeResponse>> = networkHandler.safeApiFlow(
+        apiCall = {
             userService.getUserInfos(
                 key = key,
                 city = city
             )
         }
-    ).flowOn(ioDispatcher)
+    )
 }
