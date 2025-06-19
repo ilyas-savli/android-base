@@ -8,12 +8,12 @@ plugins {
 }
 
 android {
-    namespace = AppConfig.namespaceDesignSystem
+    namespace = AppConfig.NAMESPACE_DESIGN_SYSTEM
 
-    compileSdk = AppConfig.compileSdk
+    compileSdk = AppConfig.COMPILE_SDK
 
     defaultConfig {
-        minSdk = AppConfig.minSdk
+        minSdk = AppConfig.MIN_SDK
     }
 
     lint {
@@ -28,14 +28,14 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = AppConfig.jvmTarget
+        jvmTarget = AppConfig.JVM_TARGET
     }
 
     buildFeatures {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = AppConfig.composeCompiler
+        kotlinCompilerExtensionVersion = AppConfig.COMPOSE_COMPILER
     }
 }
 

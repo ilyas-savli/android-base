@@ -1,6 +1,6 @@
 package com.nyth.app.core.network.repository
 
-import com.nyth.app.core.model.remote.network.NetworkResult
+import com.nyth.app.core.model.remote.network.Result
 import com.nyth.app.core.model.remote.response.pray.PrayTimeResponse
 import com.nyth.app.core.network.service.UserService
 import com.nyth.app.core.network.utils.NetworkHandler
@@ -14,7 +14,7 @@ class UserRepository @Inject constructor(
     suspend fun getPrayTimes(
         key: String,
         city: String
-    ): Flow<NetworkResult<PrayTimeResponse>> = networkHandler.safeApiFlow(
+    ): Flow<Result<PrayTimeResponse>> = networkHandler.safeApiFlow(
         apiCall = {
             userService.getUserInfos(
                 key = key,

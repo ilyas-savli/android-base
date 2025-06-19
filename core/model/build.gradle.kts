@@ -12,16 +12,16 @@ import com.android.build.api.dsl.LibraryBuildType
 }
 
 android {
-    namespace = AppConfig.namespaceModel
+    namespace = AppConfig.NAMESPACE_MODEL
 
-    compileSdk = AppConfig.compileSdk
+    compileSdk = AppConfig.COMPILE_SDK
 
     buildFeatures {
         buildConfig = true
     }
 
     defaultConfig {
-        minSdk = AppConfig.minSdk
+        minSdk = AppConfig.MIN_SDK
     }
 
     lint {
@@ -43,7 +43,7 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = AppConfig.jvmTarget
+        jvmTarget = AppConfig.JVM_TARGET
     }
 }
 

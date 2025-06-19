@@ -14,40 +14,40 @@ plugins {
 }
 
 android {
-    namespace = AppConfig.namespaceApp
+    namespace = AppConfig.NAMESPACE_APP
 
     signingConfigs {
-        getByName(AppConfig.debug) {
-            storeFile = file(AppConfig.demoJksFilePath)
-            storePassword = AppConfig.storePassword
-            keyAlias = AppConfig.keyAlias
-            keyPassword = AppConfig.keyPassword
+        getByName(AppConfig.DEBUG) {
+            storeFile = file(AppConfig.DEMO_JKS_FILE_PATH)
+            storePassword = AppConfig.STORE_PASSWORD
+            keyAlias = AppConfig.KEY_ALIAS
+            keyPassword = AppConfig.KEY_PASSWORD
         }
-        create(AppConfig.stage) {
-            storeFile = file(AppConfig.demoJksFilePath)
-            storePassword = AppConfig.storePassword
-            keyAlias = AppConfig.keyAlias
-            keyPassword = AppConfig.keyPassword
+        create(AppConfig.STAGE) {
+            storeFile = file(AppConfig.DEMO_JKS_FILE_PATH)
+            storePassword = AppConfig.STORE_PASSWORD
+            keyAlias = AppConfig.KEY_ALIAS
+            keyPassword = AppConfig.KEY_PASSWORD
         }
-        create(AppConfig.prod) {
-            storeFile = file(AppConfig.demoJksFilePath)
-            storePassword = AppConfig.storePassword
-            keyAlias = AppConfig.keyAlias
-            keyPassword = AppConfig.keyPassword
+        create(AppConfig.PROD) {
+            storeFile = file(AppConfig.DEMO_JKS_FILE_PATH)
+            storePassword = AppConfig.STORE_PASSWORD
+            keyAlias = AppConfig.KEY_ALIAS
+            keyPassword = AppConfig.KEY_PASSWORD
         }
     }
 
     defaultConfig {
-        applicationId = AppConfig.applicationId
-        minSdk = AppConfig.minSdk
-        compileSdk = AppConfig.compileSdk
-        targetSdk = AppConfig.targetSdk
+        applicationId = AppConfig.APPLICATION_ID
+        minSdk = AppConfig.MIN_SDK
+        compileSdk = AppConfig.COMPILE_SDK
+        targetSdk = AppConfig.TARGET_SDK
 
-        versionCode = AppConfig.versionCode
+        versionCode = AppConfig.VERSION_CODE
 
-        versionName = AppConfig.versionName
+        versionName = AppConfig.VERSION_NAME
 
-        testInstrumentationRunner = AppConfig.testInstrumentationRunner
+        testInstrumentationRunner = AppConfig.TEST_INSTRUMENTATION_RUNNER
 
         vectorDrawables {
             useSupportLibrary = true
@@ -57,14 +57,14 @@ android {
             abortOnError = false
         }
 
-        flavorDimensions += AppConfig.flavorDimension
+        flavorDimensions += AppConfig.FLAVOR_DIMENSION
     }
 
     buildTypes {
         debug {
-            applicationIdSuffix = AppConfig.debugAppIdSuffix
-            versionNameSuffix = AppConfig.debugVersionNameSuffix
-            manifestPlaceholders["deepLinkHost"] = AppConfig.deepLinkHostStage
+            applicationIdSuffix = AppConfig.DEBUG_APP_ID_SUFFIX
+            versionNameSuffix = AppConfig.DEBUG_VERSION_NAME_SUFFIX
+            manifestPlaceholders["deepLinkHost"] = AppConfig.DEEP_LINK_HOST_STAGE
         }
 
         release {
@@ -73,8 +73,8 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            signingConfig = signingConfigs.getByName(AppConfig.prod)
-            manifestPlaceholders["deepLinkHost"] = AppConfig.deepLinkHostProd
+            signingConfig = signingConfigs.getByName(AppConfig.PROD)
+            manifestPlaceholders["deepLinkHost"] = AppConfig.DEEP_LINK_HOST_PROD
         }
     }
     compileOptions {
@@ -82,43 +82,43 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = AppConfig.jvmTarget
+        jvmTarget = AppConfig.JVM_TARGET
     }
     buildFeatures {
         compose = true
         buildConfig = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = AppConfig.composeCompiler
+        kotlinCompilerExtensionVersion = AppConfig.COMPOSE_COMPILER
     }
 
     productFlavors {
-        create(AppConfig.prod) {
-            dimension = AppConfig.flavorDimension
+        create(AppConfig.PROD) {
+            dimension = AppConfig.FLAVOR_DIMENSION
 
-            manifestPlaceholders["appLabel"] = AppConfig.prodAppName
-            manifestPlaceholders["applicationIcon"] = AppConfig.prodIcon
-            manifestPlaceholders["applicationRoundIcon"] = AppConfig.prodRoundIcon
+            manifestPlaceholders["appLabel"] = AppConfig.PROD_APP_NAME
+            manifestPlaceholders["applicationIcon"] = AppConfig.PROD_ICON
+            manifestPlaceholders["applicationRoundIcon"] = AppConfig.PROD_ROUND_ICON
 
-            versionName = AppConfig.versionName
+            versionName = AppConfig.VERSION_NAME
         }
-        create(AppConfig.stage) {
-            dimension = AppConfig.flavorDimension
+        create(AppConfig.STAGE) {
+            dimension = AppConfig.FLAVOR_DIMENSION
 
-            applicationIdSuffix = AppConfig.stageAppIdSuffix
-            versionNameSuffix = AppConfig.stageVersionNameSuffix
+            applicationIdSuffix = AppConfig.STAGE_APP_ID_SUFFIX
+            versionNameSuffix = AppConfig.STAGE_VERSION_NAME_SUFFIX
 
-            manifestPlaceholders["appLabel"] = AppConfig.devAppName
-            manifestPlaceholders["applicationIcon"] = AppConfig.stageIcon
-            manifestPlaceholders["applicationRoundIcon"] = AppConfig.stageRoundIcon
+            manifestPlaceholders["appLabel"] = AppConfig.DEV_APP_NAME
+            manifestPlaceholders["applicationIcon"] = AppConfig.STAGE_ICON
+            manifestPlaceholders["applicationRoundIcon"] = AppConfig.STAGE_ROUND_ICON
 
-            versionName = AppConfig.stageVersionName
+            versionName = AppConfig.STAGE_VERSION_NAME
         }
     }
 
     // Access properties
-    val targetFlavor: String = AppConfig.stage
-    val targetBuildType: String = AppConfig.debug
+    val targetFlavor: String = AppConfig.STAGE
+    val targetBuildType: String = AppConfig.DEBUG
 
     androidComponents.beforeVariants { variant ->
         variant.enable =
@@ -127,7 +127,7 @@ android {
         var releaseNote = ""
         if (variant.enable) {
             releaseNote = when (variant.flavorName) {
-                AppConfig.stage -> {
+                AppConfig.STAGE -> {
                     "READY FOR STAGE kartları test edilebilir."
                 }
 

@@ -4,7 +4,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import com.nyth.app.core.database.utils.convertToObject
-import com.nyth.app.core.model.remote.network.NetworkResult
+import com.nyth.app.core.model.remote.network.Result
 import com.nyth.app.core.model.remote.response.ErrorResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.channelFlow
@@ -35,22 +35,22 @@ class NetworkHandler @Inject constructor(
         return false
     }
 
-    inline fun <T> safeApiFlow(crossinline apiCall: suspend () -> Response<T>): Flow<NetworkResult<T>> =
+    inline fun <T> safeApiFlow(crossinline apiCall: suspend () -> Response<T>): Flow<Result<T>> =
         channelFlow {
-            send(NetworkResult.Loading)
+            send(Result.Loading)
             try {
                 if (!hasInternet()) {
-                    send(NetworkResult.Error(message = "No Internet Connection"))
+                    send(Result.Error(message = "No Internet Connection"))
                     return@channelFlow
                 }
                 val response = apiCall()
                 if (response.isSuccessful) {
                     val body = response.body()
                     if (body != null) {
-                        send(NetworkResult.Success(body))
+                        send(Result.Success(body))
                     } else {
                         send(
-                            NetworkResult.Error(
+                            Result.Error(
                                 message = "Empty response",
                                 code = response.code()
                             )
@@ -59,25 +59,25 @@ class NetworkHandler @Inject constructor(
                 } else {
                     val errorResponse =
                         convertToObject<ErrorResponse>(response.errorBody()?.string())
-                    send(NetworkResult.Error(error = errorResponse, code = response.code()))
+                    send(Result.Error(error = errorResponse, code = response.code()))
                 }
             } catch (e: SocketTimeoutException) {
-                send(NetworkResult.Error(message = "SocketTimeoutException: ${e.localizedMessage}"))
+                send(Result.Error(message = "SocketTimeoutException: ${e.localizedMessage}"))
             } catch (e: IllegalStateException) {
-                send(NetworkResult.Error(message = "IllegalStateException: ${e.localizedMessage}"))
+                send(Result.Error(message = "IllegalStateException: ${e.localizedMessage}"))
             } catch (e: UnknownHostException) {
-                send(NetworkResult.Error(message = "UnknownHostException: ${e.localizedMessage}"))
+                send(Result.Error(message = "UnknownHostException: ${e.localizedMessage}"))
             } catch (e: IOException) {
-                send(NetworkResult.Error(message = "IOException: ${e.localizedMessage}"))
+                send(Result.Error(message = "IOException: ${e.localizedMessage}"))
             } catch (e: HttpException) {
                 send(
-                    NetworkResult.Error(
+                    Result.Error(
                         message = "HTTP error: ${e.localizedMessage}",
                         code = e.code()
                     )
                 )
             } catch (e: Exception) {
-                send(NetworkResult.Error(message = "Unexpected error: ${e.localizedMessage}"))
+                send(Result.Error(message = "Unexpected error: ${e.localizedMessage}"))
             }
         }
 }

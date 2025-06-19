@@ -1,76 +1,85 @@
 object AppConfig {
-    const val applicationId = "com.nyth.app"
+    const val APPLICATION_ID = "com.nyth.app"
 
-    // namespace app
-    const val namespaceApp = "com.nyth.app"
+    // region namespaces
+    const val NAMESPACE_APP = "com.nyth.app"
 
-    // namespace core modules
-    const val namespaceModel = "com.nyth.app.core.model"
-    const val namespaceNetwork = "com.nyth.app.core.network"
-    const val namespaceDatabase = "com.nyth.app.core.database"
-    const val namespaceDesignSystem = "com.nyth.app.core.designsystem"
+    // modules
+    const val NAMESPACE_MODEL = "com.nyth.app.core.model"
+    const val NAMESPACE_NETWORK = "com.nyth.app.core.network"
+    const val NAMESPACE_DATABASE = "com.nyth.app.core.database"
+    const val NAMESPACE_DESIGN_SYSTEM = "com.nyth.app.core.designsystem"
 
-    const val namespaceTesting = "com.nyth.app.core.testing"
+    const val NAMESPACE_TESTING = "com.nyth.app.core.testing"
 
-    // namespace feature modules
-    const val namespaceAuth = "com.nyth.app.feature.auth"
-    const val namespaceListing = "com.nyth.app.feature.listing"
+    // features
+    const val NAMESPACE_AUTH = "com.nyth.app.feature.auth"
+    const val NAMESPACE_LISTING = "com.nyth.app.feature.listing"
+    // endregion
 
-    // version info
-    private const val versionMajor = 1
-    private const val versionMinor = 0
-    private const val versionPatch = 0
+    // region version info
+    private const val VERSION_MAJOR = 1
+    private const val VERSION_MINOR = 0
+    private const val VERSION_PATCH = 0
 
-    const val versionName = "v$versionMajor.$versionMinor.$versionPatch"
-    const val versionCode = 1
+    const val VERSION_NAME = "v$VERSION_MAJOR.$VERSION_MINOR.$VERSION_PATCH"
+    const val VERSION_CODE = 1
+    // endregion
 
-    // sdk configs
-    const val compileSdk = 36
-    const val minSdk = 26
-    const val targetSdk = 36
+    // region sdk configs
+    const val COMPILE_SDK = 36
+    const val MIN_SDK = 26
+    const val TARGET_SDK = 36
 
-    const val testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    const val TEST_INSTRUMENTATION_RUNNER = "androidx.test.runner.AndroidJUnitRunner"
+    // endregion
 
-    // flavors
-    const val stage = "stage"
-    const val prod = "prod"
+    // region flavors
+    const val STAGE = "stage"
+    const val PROD = "prod"
+    // endregion
 
-    // build types
-    const val debug = "debug"
-    const val release = "release"
+    // region build types
+    const val DEBUG = "debug"
+    const val RELEASE = "release"
+    // endregion
 
-    // signing configs
-    const val demoJksFilePath = "../config/demoJks"
-    const val storePassword = "demo1234"
-    const val keyAlias = "key0"
-    const val keyPassword = "demo1234"
+    // region signing configs
+    const val DEMO_JKS_FILE_PATH = "../config/demoJks"
+    const val STORE_PASSWORD = "demo1234"
+    const val KEY_ALIAS = "key0"
+    const val KEY_PASSWORD = "demo1234"
+    // endregion
 
-    // flavor configs
-    const val flavorDimension = "version"
-    const val debugAppIdSuffix = ".debug"
-    const val debugVersionNameSuffix = "-debug"
-    const val devAppName = "androidbase stage"
-    const val prodAppName = "androidbase"
+    // region flavor configs
+    const val FLAVOR_DIMENSION = "version"
+    const val DEBUG_APP_ID_SUFFIX = ".debug"
+    const val DEBUG_VERSION_NAME_SUFFIX = "-debug"
+    const val DEV_APP_NAME = "androidbase stage"
+    const val PROD_APP_NAME = "androidbase"
+    // endregion
 
-    // stage icons
-    const val stageIcon = "@mipmap/ic_launcher_stage"
-    const val stageRoundIcon = "@mipmap/ic_launcher_stage_round"
-    const val prodIcon = "@mipmap/ic_launcher"
-    const val prodRoundIcon = "@mipmap/ic_launcher_round"
+    // region stage configs
+    const val STAGE_ICON = "@mipmap/ic_launcher_stage"
+    const val STAGE_ROUND_ICON = "@mipmap/ic_launcher_stage_round"
 
     // stage configs
-    const val stageAppIdSuffix = ".stage"
-    const val stageVersionNameSuffix = "-stage"
-    const val stageVersionName = "v1.0.91"
+    const val STAGE_APP_ID_SUFFIX = ".stage"
+    const val STAGE_VERSION_NAME_SUFFIX = "-stage"
+    const val STAGE_VERSION_NAME = "v1.0.91"
+    // endregion
 
-    // jvm configs
-    const val jvmTarget = "17"
+    // region prod icons
+    const val PROD_ICON = "@mipmap/ic_launcher"
+    const val PROD_ROUND_ICON = "@mipmap/ic_launcher_round"
+    // endregion
 
-    // compose compiler version
-    const val composeCompiler = "1.4.2"
+    const val JVM_TARGET = "17"
 
-    const val deepLinkHostStage = "sm-web.androidbase.com"
+    const val COMPOSE_COMPILER = "1.4.2"
 
-    //DeepLink
-    const val deepLinkHostProd = "www.androidbase.com"
+    // region deeplink
+    const val DEEP_LINK_HOST_STAGE = "sm-web.androidbase.com"
+    const val DEEP_LINK_HOST_PROD = "www.androidbase.com"
+    // endregion
 }

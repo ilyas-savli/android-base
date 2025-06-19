@@ -11,9 +11,9 @@ plugins {
 }
 
 android {
-    namespace = AppConfig.namespaceAuth
+    namespace = AppConfig.NAMESPACE_AUTH
 
-    compileSdk = AppConfig.compileSdk
+    compileSdk = AppConfig.COMPILE_SDK
 
     buildFeatures {
         compose = true
@@ -21,7 +21,7 @@ android {
     }
 
     defaultConfig {
-        minSdk = AppConfig.minSdk
+        minSdk = AppConfig.MIN_SDK
     }
 
     lint {
@@ -35,11 +35,11 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = AppConfig.jvmTarget
+        jvmTarget = AppConfig.JVM_TARGET
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = AppConfig.composeCompiler
+        kotlinCompilerExtensionVersion = AppConfig.COMPOSE_COMPILER
     }
 }
 

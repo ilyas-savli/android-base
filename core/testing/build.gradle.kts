@@ -16,14 +16,14 @@ val localProperties = Properties().apply {
 }
 
 android {
-    namespace = AppConfig.namespaceTesting
+    namespace = AppConfig.NAMESPACE_TESTING
 
-    compileSdk = AppConfig.compileSdk
+    compileSdk = AppConfig.COMPILE_SDK
 
     buildFeatures.buildConfig = true
 
     defaultConfig {
-        minSdk = AppConfig.minSdk
+        minSdk = AppConfig.MIN_SDK
     }
 
     lint {
@@ -37,7 +37,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = AppConfig.jvmTarget
+        jvmTarget = AppConfig.JVM_TARGET
     }
 }
 

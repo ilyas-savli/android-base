@@ -1,5 +1,4 @@
 import com.android.build.api.dsl.LibraryBuildType
-import java.util.Properties
 
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
@@ -12,14 +11,14 @@ plugins {
 }
 
 android {
-    namespace = AppConfig.namespaceNetwork
+    namespace = AppConfig.NAMESPACE_NETWORK
 
-    compileSdk = AppConfig.compileSdk
+    compileSdk = AppConfig.COMPILE_SDK
 
     buildFeatures.buildConfig = true
 
     defaultConfig {
-        minSdk = AppConfig.minSdk
+        minSdk = AppConfig.MIN_SDK
     }
 
     lint {
@@ -42,7 +41,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = AppConfig.jvmTarget
+        jvmTarget = AppConfig.JVM_TARGET
     }
 }
 

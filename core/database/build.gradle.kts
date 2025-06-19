@@ -9,12 +9,12 @@ plugins {
 }
 
 android {
-    namespace = AppConfig.namespaceDatabase
+    namespace = AppConfig.NAMESPACE_DATABASE
 
-    compileSdk = AppConfig.compileSdk
+    compileSdk = AppConfig.COMPILE_SDK
 
     defaultConfig {
-        minSdk = AppConfig.minSdk
+        minSdk = AppConfig.MIN_SDK
     }
 
     lint {
@@ -29,7 +29,7 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = AppConfig.jvmTarget
+        jvmTarget = AppConfig.JVM_TARGET
     }
 }
 
