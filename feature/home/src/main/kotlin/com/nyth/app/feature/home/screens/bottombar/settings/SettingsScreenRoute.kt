@@ -11,7 +11,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.nyth.app.core.designsystem.components.CustomButton
 import com.nyth.app.core.designsystem.navigation.Screen
-import com.nyth.app.feature.home.screens.bottombar.settings.domain.SettingsScreenViewModel
 
 @Composable
 fun SettingsScreenRoute(

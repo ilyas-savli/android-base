@@ -1,4 +1,4 @@
-package com.nyth.app.feature.home.screens.bottombar.search.domain
+package com.nyth.app.feature.home.screens.bottombar.search
 
 import androidx.lifecycle.ViewModel
 import com.nyth.app.core.network.repository.UserRepository
@@ -7,6 +7,5 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchScreenViewModel @Inject constructor(
-    private val userRepository: UserRepository,
-) : ViewModel() {
-}
+    private val userRepository: UserRepository
+) : ViewModel()

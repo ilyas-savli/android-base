@@ -34,12 +34,12 @@ class DashboardScreenViewModel @Inject constructor(
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000),
-        initialValue = false,
+        initialValue = false
     )
 
     private fun dashboardUiState(): Flow<DashboardUiState> = channelFlow {
         val prayTimesResponse =
-            userRepository.getPrayTimes(key = "sefef", city = "istadzsfsdfnbul")
+            userRepository.getPrayTimes(key = "sefef", city = "istanbul")
 
         combine(
             shouldLogoutUser,

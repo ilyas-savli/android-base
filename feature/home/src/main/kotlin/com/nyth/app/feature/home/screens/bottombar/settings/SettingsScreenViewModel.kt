@@ -1,4 +1,4 @@
-package com.nyth.app.feature.home.screens.bottombar.settings.domain
+package com.nyth.app.feature.home.screens.bottombar.settings
 
 import androidx.lifecycle.ViewModel
 import com.nyth.app.core.network.utils.AuthManager

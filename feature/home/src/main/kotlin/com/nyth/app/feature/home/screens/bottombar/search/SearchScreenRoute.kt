@@ -10,7 +10,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.nyth.app.core.designsystem.navigation.Screen
-import com.nyth.app.feature.home.screens.bottombar.search.domain.SearchScreenViewModel
 
 @Composable
 fun SearchScreenRoute(
