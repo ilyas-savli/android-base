@@ -27,7 +27,7 @@ env:
 jobs:
   build:
     name: Build and Analyze
-    runs-on: self-hosted  # Match runner name
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
