@@ -11,10 +11,6 @@ plugins {
     alias(libs.plugins.stack.ksp)
 }
 
-val localProperties = Properties().apply {
-    rootProject.file("local.properties").inputStream().use { load(it) }
-}
-
 android {
     namespace = AppConfig.NAMESPACE_TESTING
 

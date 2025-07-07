@@ -1,5 +1,6 @@
 import com.android.build.api.dsl.ApplicationProductFlavor
 import com.google.firebase.appdistribution.gradle.firebaseAppDistribution
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.stack.android.application)
@@ -11,6 +12,11 @@ plugins {
     alias(libs.plugins.stack.crashlytics)
     alias(libs.plugins.stack.firebase.app.distribution)
     alias(libs.plugins.stack.ksp)
+}
+
+// Load local.properties
+val ciCdProperties = Properties().apply {
+    rootProject.file("cicd.properties").inputStream().use { load(it) }
 }
 
 android {
@@ -45,7 +51,7 @@ android {
 
         versionCode = AppConfig.VERSION_CODE
 
-        versionName = AppConfig.VERSION_NAME
+        versionName = ciCdProperties.getProperty("VERSION_NAME") ?: AppConfig.VERSION_NAME
 
         testInstrumentationRunner = AppConfig.TEST_INSTRUMENTATION_RUNNER
 
@@ -101,6 +107,7 @@ android {
             manifestPlaceholders["applicationRoundIcon"] = AppConfig.PROD_ROUND_ICON
 
             versionName = AppConfig.VERSION_NAME
+            versionName = ciCdProperties.getProperty("VERSION_NAME") ?: AppConfig.STAGE_VERSION_NAME
         }
         create(AppConfig.STAGE) {
             dimension = AppConfig.FLAVOR_DIMENSION
@@ -112,13 +119,23 @@ android {
             manifestPlaceholders["applicationIcon"] = AppConfig.STAGE_ICON
             manifestPlaceholders["applicationRoundIcon"] = AppConfig.STAGE_ROUND_ICON
 
-            versionName = AppConfig.STAGE_VERSION_NAME
+            versionName = ciCdProperties.getProperty("VERSION_NAME") ?: AppConfig.VERSION_NAME
         }
     }
 
+    /**
+     * Can distribute the Release app from terminal via typing
+     * For PROD Version -> gradle assembleRelease appDistributionUploadProdRelease
+     * For DEV Version -> gradle assembleRelease appDistributionUploadDevRelease
+     *
+     * Can distribute the Debug app from terminal via typing
+     * For PROD Version -> gradle assembleDebug appDistributionUploadProdDebug
+     * For DEV Version -> gradle assembleDebug appDistributionUploadDevDebug
+     */
     // Access properties
-    val targetFlavor: String = AppConfig.STAGE
-    val targetBuildType: String = AppConfig.DEBUG
+    val targetFlavor: String = ciCdProperties.getProperty("TARGET_FLAVOR") ?: AppConfig.STAGE
+    val targetBuildType: String =
+        ciCdProperties.getProperty("TARGET_BUILD_TYPE") ?: AppConfig.DEBUG
 
     androidComponents.beforeVariants { variant ->
         variant.enable =
@@ -128,11 +145,11 @@ android {
         if (variant.enable) {
             releaseNote = when (variant.flavorName) {
                 AppConfig.STAGE -> {
-                    "READY FOR STAGE kartları test edilebilir."
+                    AppConfig.stageNotes
                 }
 
                 else -> {
-                    "READY FOR PRODUCTION kartları test edilebilir."
+                    AppConfig.prodNotes
                 }
             }
         }

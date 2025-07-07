@@ -82,4 +82,9 @@ object AppConfig {
     const val DEEP_LINK_HOST_STAGE = "sm-web.androidbase.com"
     const val DEEP_LINK_HOST_PROD = "www.androidbase.com"
     // endregion
+
+    // region distribution notes
+    const val prodNotes = "'Prod Test' kartları test edilebilir."
+    const val stageNotes = "'Stage Test' kartları test edilebilir."
+    // endregion
 }

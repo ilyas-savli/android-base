@@ -1,0 +1,184 @@
+name: Self Hosted Test
+
+on:
+  push:
+    branches:
+      - feature/develop
+      - release/*
+      - main
+
+env:
+  # Set environment variables for your project..
+  VERSION_NAME: "1.1.${{ github.run_number }}"
+  STAGE_DEBUG_APK_PATH: app/build/outputs/apk/dev/debug/app-dev-debug.apk
+  STAGE_RELEASE_APK_PATH: app/build/outputs/apk/dev/release/app-dev-release.apk
+  PROD_DEBUG_APK_PATH: app/build/outputs/apk/prod/debug/app-prod-debug.apk
+  PROD_RELEASE_APK_PATH: app/build/outputs/apk/prod/release/app-prod-release.apk
+  AAB_PATH: app/build/outputs/bundle/prod/release/app-prod-release.aab
+  RELEASE_NOTES: "READY FOR RELEASE kartları test edilebilir."
+  DEVELOP_NOTES: "READY FOR STAGE kartları test edilebilir."
+  PUBLISH_NOTES: "Uygulama Yayınlandı."
+  IS_PRODUCTION: false
+  IS_STAGE_DEBUG: false
+  IS_STAGE_RELEASE: false
+  IS_PROD_DEBUG: false
+  IS_PROD_RELEASE: false
+
+jobs:
+  build:
+    name: Build and Analyze
+    runs-on:
+      - ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
+      - name: Check Event Type And Commit Message
+        id: check_event
+        run: |
+          if [ "${{ github.event_name }}" = "push" ]; then
+            echo "User=${{ github.event.pusher.name }}" >> $GITHUB_ENV
+          
+            echo "COMMIT_MESSAGE<<EOF" >> $GITHUB_ENV
+            echo "${{ github.event.head_commit.message }}" >> $GITHUB_ENV
+            echo "EOF" >> $GITHUB_ENV
+          elif [ "${{ github.event_name }}" = "pull_request" ]; then
+            echo "User=${{ github.event.pull_request.user.login }}" >> $GITHUB_ENV
+            COMMIT_MESSAGE=$(git log -1 --pretty=format:'%s')
+            echo "COMMIT_MESSAGE<<EOF" >> $GITHUB_ENV
+            echo "$COMMIT_MESSAGE" >> $GITHUB_ENV
+            echo "EOF" >> $GITHUB_ENV
+          fi
+
+      - name: Check Branch and Set All Required Environment Variables
+        run: |
+          echo "GITHUB_REF=${GITHUB_REF}"
+          echo "Branch name extracted: ${GITHUB_REF#refs/heads/}"
+          BRANCH_NAME="${GITHUB_REF#refs/heads/}"
+          
+          if [[ "$BRANCH_NAME" == "feature/develop" ]]; then
+            echo "IS_STAGE_DEBUG=true" >> $GITHUB_ENV
+          
+            echo "TARGET_FLAVOR=dev" >> cicd.properties
+            echo "TARGET_BUILD_TYPE=debug" >> cicd.properties
+            echo "VERSION_NAME=1.1.${{ github.run_number }}" >> cicd.properties
+           
+            echo "FIREBASE_NOTES=${VERSION_NAME}_stage_debug versiyon yayında\n$DEVELOP_NOTES" >> $GITHUB_ENV
+          
+            echo "FIREBASE_APP_ID=${{ secrets.FIREBASE_STAGE_DEBUG_APP_ID }}" >> $GITHUB_ENV
+          elif [[ "$BRANCH_NAME" == release/* ]]; then
+            echo "IS_PROD_RELEASE=true" >> $GITHUB_ENV
+          
+            echo "TARGET_FLAVOR=prod" >> cicd.properties
+            echo "TARGET_BUILD_TYPE=release" >> cicd.properties
+            echo "VERSION_NAME=1.1.${{ github.run_number }}" >> cicd.properties
+          
+            echo "FIREBASE_NOTES=${VERSION_NAME}_prod_release versiyon yayında\n$RELEASE_NOTES" >> $GITHUB_ENV
+          
+            echo "FIREBASE_APP_ID=${{ secrets.FIREBASE_PROD_APP_ID }}" >> $GITHUB_ENV
+          elif [[ "$BRANCH_NAME" == main ]]; then
+            echo "IS_PRODUCTION=true" >> $GITHUB_ENV
+          
+            echo "TARGET_FLAVOR=prod" >> cicd.properties
+            echo "TARGET_BUILD_TYPE=release" >> cicd.properties
+          
+            echo "FIREBASE_NOTES=$PUBLISH_NOTES" >> $GITHUB_ENV
+          
+            echo "FIREBASE_APP_ID=${{ secrets.FIREBASE_PROD_APP_ID }}" >> $GITHUB_ENV
+          else
+            echo "Not on a buildable branch. Skipping build."
+            exit 0
+          fi
+
+      - name: Build APP (APK OR AAB IF PRODUCTION)
+        run: |
+          if [[ "$IS_STAGE_DEBUG" == "true" ]]; then
+            ./gradlew assembleDevDebug --no-daemon
+            mv "$STAGE_DEBUG_APK_PATH" app.apk
+          elif [[ "$IS_STAGE_RELEASE" == "true" ]]; then
+            ./gradlew assembleDevRelease --no-daemon
+            mv "$STAGE_RELEASE_APK_PATH" app.apk
+          elif [[ "$IS_PROD_DEBUG" == "true" ]]; then
+            ./gradlew assembleProdDebug --no-daemon
+            mv "$PROD_DEBUG_APK_PATH" app.apk
+          elif [[ "$IS_PROD_RELEASE" == "true" ]]; then
+            ./gradlew assembleProdRelease --no-daemon
+            mv "$PROD_RELEASE_APK_PATH" app.apk
+          elif [[ "$IS_PRODUCTION" == "true" ]]; then
+            ./gradlew bundleProdRelease --no-daemon
+            mv "$AAB_PATH" app.aab
+          else
+            echo "Not on a buildable case. Skipping build."
+            exit 0
+          fi
+
+      - name: Run lint for debug
+        run: ./gradlew lintDebug || true
+
+      - name: Run lint for release
+        run: ./gradlew lintRelease || true
+
+      - name: Upload Lint Reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: lint-reports
+          path: |
+            **/build/reports/lint/*.html
+            **/build/reports/lint/*.xml
+            **/build/reports/*.html
+            **/build/reports/*.xml
+
+      - name: List APK and AAB files
+        run: |
+          echo "Listing APK files:"
+          find app/build/outputs/apk -type f -name "*.apk" || true
+          echo "Listing AAB files:"
+          find app/build/outputs/bundle -type f -name "*.aab" || true
+
+      - name: Finish IF PRODUCTION For Now
+        if: env.IS_PRODUCTION == 'true'
+        run: |
+          echo "Publish to Play Store will add later. Skipping this build for now."
+          exit 0
+
+      - name: Upload Stage Debug APK to Firebase App Distribution
+        if: env.IS_STAGE_DEBUG == 'true'
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: ${{ secrets.STAGE_DEBUG_APP_ID }}
+          serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
+          groups: testers
+          file: app.apk
+          releaseNotes: ${{ env.FIREBASE_NOTES }}\n\n\nYapılan Geliştirmeler\n\n${{ env.COMMIT_MESSAGE }}
+          debug: true
+
+      - name: Upload Prod Release APK to Firebase App Distribution
+        if: env.IS_PROD_RELEASE == 'true'
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: ${{ secrets.PROD_RELEASE_APP_ID }}
+          serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
+          groups: testers
+          file: app.apk
+          releaseNotes: ${{ env.FIREBASE_NOTES }}\n\n\nYapılan Geliştirmeler\n\n${{ env.COMMIT_MESSAGE }}
+          debug: true
+
+      - name: Upload Store AAB to Firebase App Distribution
+        if: env.IS_PRODUCTION == 'true'
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: ${{ secrets.PROD_RELEASE_APP_ID }}
+          serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
+          groups: testers
+          file: app.aab
+          releaseNotes: ${{ env.FIREBASE_NOTES }}\n\n\nYapılan Geliştirmeler\n\n${{ env.COMMIT_MESSAGE }}
+          debug: true
