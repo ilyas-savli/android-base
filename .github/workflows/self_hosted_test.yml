@@ -180,5 +180,5 @@ jobs:
           serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
           groups: testers
           file: app.aab
-          releaseNotes: ${{ env.FIREBASE_NOTES }}\n\n\nYapılan Geliştirmeler\n\n${{ env.COMMIT_MESSAGE }}
+          releaseNotes: ${{ env.FIREBASE_NOTES }}\n\n\nYapılan Geliştirmeler.\n\n${{ env.COMMIT_MESSAGE }}
           debug: true
