@@ -10,8 +10,8 @@ on:
 env:
   # Set environment variables for your project..
   VERSION_NAME: "1.1.${{ github.run_number }}"
-  STAGE_DEBUG_APK_PATH: app/build/outputs/apk/dev/debug/app-dev-debug.apk
-  STAGE_RELEASE_APK_PATH: app/build/outputs/apk/dev/release/app-dev-release.apk
+  STAGE_DEBUG_APK_PATH: app/build/outputs/apk/stage/debug/app-stage-debug.apk
+  STAGE_RELEASE_APK_PATH: app/build/outputs/apk/stage/release/app-stage-release.apk
   PROD_DEBUG_APK_PATH: app/build/outputs/apk/prod/debug/app-prod-debug.apk
   PROD_RELEASE_APK_PATH: app/build/outputs/apk/prod/release/app-prod-release.apk
   AAB_PATH: app/build/outputs/bundle/prod/release/app-prod-release.aab
@@ -68,7 +68,7 @@ jobs:
           if [[ "$BRANCH_NAME" == "develop" ]]; then
             echo "IS_STAGE_DEBUG=true" >> $GITHUB_ENV
           
-            echo "TARGET_FLAVOR=dev" >> cicd.properties
+            echo "TARGET_FLAVOR=stage" >> cicd.properties
             echo "TARGET_BUILD_TYPE=debug" >> cicd.properties
             echo "VERSION_NAME=1.1.${{ github.run_number }}" >> cicd.properties
            
@@ -102,10 +102,10 @@ jobs:
       - name: Build APP (APK OR AAB IF PRODUCTION)
         run: |
           if [[ "$IS_STAGE_DEBUG" == "true" ]]; then
-            ./gradlew assembleDevDebug --no-daemon
+            ./gradlew assembleStageDebug --no-daemon
             mv "$STAGE_DEBUG_APK_PATH" app.apk
           elif [[ "$IS_STAGE_RELEASE" == "true" ]]; then
-            ./gradlew assembleDevRelease --no-daemon
+            ./gradlew assembleStageRelease --no-daemon
             mv "$STAGE_RELEASE_APK_PATH" app.apk
           elif [[ "$IS_PROD_DEBUG" == "true" ]]; then
             ./gradlew assembleProdDebug --no-daemon
