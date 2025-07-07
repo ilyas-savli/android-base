@@ -3,7 +3,7 @@ name: Self Hosted Test
 on:
   push:
     branches:
-      - feature/develop
+      - develop
       - release/*
       - main
 
@@ -65,7 +65,7 @@ jobs:
           echo "Branch name extracted: ${GITHUB_REF#refs/heads/}"
           BRANCH_NAME="${GITHUB_REF#refs/heads/}"
           
-          if [[ "$BRANCH_NAME" == "feature/develop" ]]; then
+          if [[ "$BRANCH_NAME" == "develop" ]]; then
             echo "IS_STAGE_DEBUG=true" >> $GITHUB_ENV
           
             echo "TARGET_FLAVOR=dev" >> cicd.properties
