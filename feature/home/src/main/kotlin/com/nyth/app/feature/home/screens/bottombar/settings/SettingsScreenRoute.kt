@@ -1,5 +1,7 @@
 package com.nyth.app.feature.home.screens.bottombar.settings
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -7,6 +9,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.nyth.app.core.designsystem.components.CustomButton
@@ -32,6 +35,7 @@ private fun SettingsScreen(
     navToNext: (Screen) -> Unit,
     logoutUser: () -> Unit
 ) {
+    val context = LocalContext.current
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -53,7 +57,11 @@ private fun SettingsScreen(
             style = androidx.compose.material3.MaterialTheme.typography.bodyMedium
         )
         CustomButton(text = "Send Email", onClick = {
-            // TODO: Implement email intent or contact action
+            val intent = Intent(Intent.ACTION_SENDTO).apply {
+                data = Uri.parse("mailto:support@parkit.com")
+                putExtra(Intent.EXTRA_SUBJECT, "Support Request")
+            }
+            context.startActivity(intent)
         })
         androidx.compose.material3.Divider(modifier = Modifier.padding(vertical = androidx.compose.ui.unit.dp(16)))
         CustomButton(text = "Logout", onClick = logoutUser)
