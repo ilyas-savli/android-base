@@ -37,7 +37,25 @@ private fun SettingsScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("Settings")
+        Text("Settings", style = androidx.compose.material3.MaterialTheme.typography.headlineMedium)
+        androidx.compose.material3.Divider(modifier = Modifier.padding(vertical = androidx.compose.ui.unit.dp(16)))
+        Text("Support", style = androidx.compose.material3.MaterialTheme.typography.titleMedium)
+        Text(
+            "If you have any issues or need help, please contact our support team. We are here to assist you!",
+            modifier = Modifier.padding(vertical = androidx.compose.ui.unit.dp(8)),
+            style = androidx.compose.material3.MaterialTheme.typography.bodyMedium
+        )
+        androidx.compose.material3.Divider(modifier = Modifier.padding(vertical = androidx.compose.ui.unit.dp(16)))
+        Text("Contact Us", style = androidx.compose.material3.MaterialTheme.typography.titleMedium)
+        Text(
+            "Email: support@parkit.com",
+            modifier = Modifier.padding(vertical = androidx.compose.ui.unit.dp(4)),
+            style = androidx.compose.material3.MaterialTheme.typography.bodyMedium
+        )
+        CustomButton(text = "Send Email", onClick = {
+            // TODO: Implement email intent or contact action
+        })
+        androidx.compose.material3.Divider(modifier = Modifier.padding(vertical = androidx.compose.ui.unit.dp(16)))
         CustomButton(text = "Logout", onClick = logoutUser)
     }
 }
