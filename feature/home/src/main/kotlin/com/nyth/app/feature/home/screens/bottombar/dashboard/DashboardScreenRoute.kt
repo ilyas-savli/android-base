@@ -23,14 +23,14 @@ fun DashboardScreenRoute(
 ) {
     val viewModel: DashboardScreenViewModel = hiltViewModel()
     val dashboardUiState by viewModel.dashboardUiState.collectAsStateWithLifecycle()
-    val shouldLogoutUser by viewModel.shouldLogoutUser.collectAsStateWithLifecycle()
+    val isUserLoggedIn by viewModel.isUserLoggedIn.collectAsStateWithLifecycle()
 
     DashboardScreen(
         onBack = onBack,
         navToNext = navToNext,
         popUntil = popUntil,
         dashboardUiState = dashboardUiState,
-        shouldLogoutUser = shouldLogoutUser
+        isUserLoggedIn = isUserLoggedIn
     )
 }
 
@@ -39,11 +39,11 @@ private fun DashboardScreen(
     onBack: () -> Unit,
     navToNext: (Screen) -> Unit,
     dashboardUiState: DashboardUiState,
-    shouldLogoutUser: Boolean,
+    isUserLoggedIn: Boolean,
     popUntil: (Screen) -> Unit
 ) {
-    LaunchedEffect(shouldLogoutUser) {
-        if (shouldLogoutUser) {
+    LaunchedEffect(isUserLoggedIn) {
+        if (!isUserLoggedIn) {
             popUntil(Screen.Login)
         }
     }
@@ -70,6 +70,6 @@ private fun PreviewScreen() {
     DashboardScreen(
         onBack = {}, navToNext = {}, popUntil = {},
         dashboardUiState = DashboardUiState.Loading,
-        shouldLogoutUser = false
+        isUserLoggedIn = true
     )
 }

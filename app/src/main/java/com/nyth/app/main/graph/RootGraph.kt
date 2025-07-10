@@ -3,6 +3,7 @@ package com.nyth.app.main.graph
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
@@ -15,12 +16,15 @@ import com.nyth.app.core.designsystem.navigation.Screen
 import com.nyth.app.feature.auth.screens.login.LoginScreenRoute
 import com.nyth.app.feature.auth.screens.splash.SplashScreenRoute
 import com.nyth.app.main.domain.MainScreenViewModel
+import kotlinx.coroutines.launch
 
 @Composable
 fun RootGraph() {
     val viewModelMain: MainScreenViewModel = hiltViewModel()
 
     val backstack = remember { mutableStateListOf<Screen>(Screen.Splash) }
+
+    val coroutine = rememberCoroutineScope()
 
     NavDisplay(
         backStack = backstack, onBack = {
@@ -49,7 +53,9 @@ fun RootGraph() {
                 NestedGraph(navToNext = {
                     backstack.add(it)
                 }, popUntil = { popScreen ->
-                    backstack.popUntil(popScreen)
+                    coroutine.launch {
+                        backstack.popUntil(popScreen)
+                    }
                 })
             }
         })

@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -29,12 +28,12 @@ class DashboardScreenViewModel @Inject constructor(
             initialValue = DashboardUiState.Loading,
         )
 
-    val shouldLogoutUser = channelFlow {
+    val isUserLoggedIn = channelFlow {
         send(authManager.isUserLoggedIn())
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000),
-        initialValue = false
+        initialValue = true
     )
 
     private fun dashboardUiState(): Flow<DashboardUiState> = channelFlow {
@@ -42,12 +41,12 @@ class DashboardScreenViewModel @Inject constructor(
             userRepository.getPrayTimes(key = "sefef", city = "istanbul")
 
         combine(
-            shouldLogoutUser,
+            isUserLoggedIn,
             prayTimesResponse
-        ) { userLoggedIn, prayTimes ->
+        ) { isUserLoggedIn, prayTimes ->
             when (prayTimes) {
                 is Result.Success -> {
-                    if (!userLoggedIn) {
+                    if (!isUserLoggedIn) {
                         DashboardUiState.Error
                     } else {
                         DashboardUiState.Success(prayTimeResponse = prayTimes.data)
