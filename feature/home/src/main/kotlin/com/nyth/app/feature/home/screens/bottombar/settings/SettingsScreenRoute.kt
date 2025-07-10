@@ -1,16 +1,20 @@
 package com.nyth.app.feature.home.screens.bottombar.settings
 
 import android.content.Intent
-import android.net.Uri
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.core.net.toUri
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.nyth.app.core.designsystem.components.CustomButton
 import com.nyth.app.core.designsystem.navigation.Screen
@@ -41,29 +45,29 @@ private fun SettingsScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("Settings", style = androidx.compose.material3.MaterialTheme.typography.headlineMedium)
-        androidx.compose.material3.Divider(modifier = Modifier.padding(vertical = androidx.compose.ui.unit.dp(16)))
-        Text("Support", style = androidx.compose.material3.MaterialTheme.typography.titleMedium)
+        Text("Settings", style = MaterialTheme.typography.titleLarge)
+        HorizontalDivider(modifier = Modifier.padding(vertical = 16.dp))
+        Text("Support", style = MaterialTheme.typography.titleMedium)
         Text(
             "If you have any issues or need help, please contact our support team. We are here to assist you!",
-            modifier = Modifier.padding(vertical = androidx.compose.ui.unit.dp(8)),
-            style = androidx.compose.material3.MaterialTheme.typography.bodyMedium
+            modifier = Modifier.padding(vertical = 8.dp),
+            style = MaterialTheme.typography.bodyLarge
         )
-        androidx.compose.material3.Divider(modifier = Modifier.padding(vertical = androidx.compose.ui.unit.dp(16)))
-        Text("Contact Us", style = androidx.compose.material3.MaterialTheme.typography.titleMedium)
+        HorizontalDivider(modifier = Modifier.padding(vertical = 16.dp))
+        Text("Contact Us", style = MaterialTheme.typography.titleMedium)
         Text(
             "Email: support@parkit.com",
-            modifier = Modifier.padding(vertical = androidx.compose.ui.unit.dp(4)),
-            style = androidx.compose.material3.MaterialTheme.typography.bodyMedium
+            modifier = Modifier.padding(vertical = 4.dp),
+            style = MaterialTheme.typography.bodyLarge
         )
         CustomButton(text = "Send Email", onClick = {
             val intent = Intent(Intent.ACTION_SENDTO).apply {
-                data = Uri.parse("mailto:support@parkit.com")
+                data = "mailto:support@androidbase.com".toUri()
                 putExtra(Intent.EXTRA_SUBJECT, "Support Request")
             }
             context.startActivity(intent)
         })
-        androidx.compose.material3.Divider(modifier = Modifier.padding(vertical = androidx.compose.ui.unit.dp(16)))
+        HorizontalDivider(modifier = Modifier.padding(vertical = 16.dp))
         CustomButton(text = "Logout", onClick = logoutUser)
     }
 }
