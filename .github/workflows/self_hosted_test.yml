@@ -3,7 +3,7 @@ name: Self Hosted Test
 on:
   push:
     branches:
-      - develop
+      - development
       - release/*
       - main
 
@@ -65,7 +65,7 @@ jobs:
           echo "Branch name extracted: ${GITHUB_REF#refs/heads/}"
           BRANCH_NAME="${GITHUB_REF#refs/heads/}"
           
-          if [[ "$BRANCH_NAME" == "develop" ]]; then
+          if [[ "$BRANCH_NAME" == "development" ]]; then
             echo "IS_STAGE_DEBUG=true" >> $GITHUB_ENV
           
             echo "TARGET_FLAVOR=stage" >> cicd.properties
@@ -117,7 +117,7 @@ jobs:
             ./gradlew bundleProdRelease --no-daemon
             mv "$AAB_PATH" app.aab
           else
-            echo "Not on a buildable case. Skipping build."
+            echo "Not on a buildable case. Skipping build.."
             exit 0
           fi
 
