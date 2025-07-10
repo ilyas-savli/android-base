@@ -6,7 +6,6 @@ import com.android.build.api.dsl.LibraryBuildType
     alias(libs.plugins.stack.android.library)
     alias(libs.plugins.stack.kotlin.android)
     alias(libs.plugins.compose.compiler)
-    alias(libs.plugins.stack.kotlin.kapt)
     alias(libs.plugins.stack.kotlin.serialization)
     alias(libs.plugins.stack.ksp)
 }

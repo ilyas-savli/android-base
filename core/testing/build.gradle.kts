@@ -6,7 +6,6 @@ plugins {
     alias(libs.plugins.stack.android.library)
     alias(libs.plugins.stack.kotlin.android)
     alias(libs.plugins.stack.hilt.plugin)
-    alias(libs.plugins.stack.kotlin.kapt)
     alias(libs.plugins.stack.kotlin.serialization)
     alias(libs.plugins.stack.ksp)
 }
@@ -46,7 +45,7 @@ dependencies {
 
     // hilt
     implementation(libs.stack.hilt.android)
-    kapt(libs.stack.hilt.compiler)
+    ksp(libs.stack.hilt.compiler)
 
     // test
     testImplementation(libs.kotlinx.coroutines.test)

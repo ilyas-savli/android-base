@@ -2,7 +2,6 @@ plugins {
     alias(libs.plugins.stack.android.application) apply false
     alias(libs.plugins.stack.android.library) apply false
     alias(libs.plugins.stack.kotlin.android) apply false
-    alias(libs.plugins.stack.kotlin.kapt) apply false
     alias(libs.plugins.stack.hilt.plugin) apply false
     alias(libs.plugins.stack.ksp) apply false
     alias(libs.plugins.stack.kotlin.serialization) apply false

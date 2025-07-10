@@ -4,7 +4,6 @@ import java.util.Properties
 
 plugins {
     alias(libs.plugins.stack.android.application)
-    alias(libs.plugins.stack.kotlin.kapt)
     alias(libs.plugins.stack.hilt.plugin)
     alias(libs.plugins.stack.kotlin.android)
     alias(libs.plugins.compose.compiler)
@@ -23,12 +22,6 @@ android {
     namespace = AppConfig.NAMESPACE_APP
 
     signingConfigs {
-        getByName(AppConfig.DEBUG) {
-            storeFile = file(AppConfig.DEMO_JKS_FILE_PATH)
-            storePassword = AppConfig.STORE_PASSWORD
-            keyAlias = AppConfig.KEY_ALIAS
-            keyPassword = AppConfig.KEY_PASSWORD
-        }
         create(AppConfig.STAGE) {
             storeFile = file(AppConfig.DEMO_JKS_FILE_PATH)
             storePassword = AppConfig.STORE_PASSWORD
@@ -175,7 +168,7 @@ dependencies {
 
     // hilt
     implementation(libs.stack.hilt.android)
-    kapt(libs.stack.hilt.compiler)
+    ksp(libs.stack.hilt.compiler)
 
     implementation(libs.androidx.startup.runtime)
 
