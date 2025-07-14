@@ -52,3 +52,9 @@ fun CustomIconButton(
 fun CustomIconButtonPreview() {
     CustomIconButton()
 }
+
+@Preview(name = "CustomIconButtonPreviewWithDownIcon", showBackground = true)
+@Composable
+fun CustomIconButtonPreviewWithDownIcon() {
+    CustomIconButton(icon = painterResource(id = R.drawable.ic_arrow_down), contentDescription = "Arrow Down")
+}

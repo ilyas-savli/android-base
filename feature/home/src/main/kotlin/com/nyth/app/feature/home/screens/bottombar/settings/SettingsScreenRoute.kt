@@ -87,8 +87,8 @@ private fun SettingsScreen(
             color = Color.Black,
             modifier = Modifier.padding(start = 24.dp, bottom = 8.dp)
         )
-        SettingsRow(text = "Support", onClick = { /* TODO */ })
-        SettingsRow(text = "Privacy Policy", onClick = { /* TODO */ })
+        SettingsRow(text = "Support", onClick = { println("Support clicked") })
+        SettingsRow(text = "Privacy Policy", onClick = { println("Privacy Policy clicked") })
         Spacer(modifier = Modifier.height(24.dp))
         // Location Section
         Text(
@@ -98,7 +98,9 @@ private fun SettingsScreen(
             color = Color.Black,
             modifier = Modifier.padding(start = 24.dp, bottom = 8.dp)
         )
-        SettingsRow(text = "Medina", onClick = { /* TODO */ })
+        SettingsRow(text = "Medina", onClick = { println("Medina clicked") })
+        Spacer(modifier = Modifier.weight(1f))
+        SettingsRow(text = "Logout", onClick = { popUntil(Screen.Login) })
     }
 }
 
