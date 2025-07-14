@@ -1,35 +1,34 @@
 package com.nyth.app.feature.home.screens.bottombar.settings
 
-import android.content.Intent
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.KeyboardArrowRight
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.core.net.toUri
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.nyth.app.core.designsystem.components.CustomButton
 import com.nyth.app.core.designsystem.navigation.Screen
 
 @Composable
 fun SettingsScreenRoute(
-    onBack: () -> Unit, navToNext: (Screen) -> Unit, popUntil: (Screen) -> Unit
+    onBack: () -> Unit,
+    navToNext: (Screen) -> Unit,
+    popUntil: (Screen) -> Unit
 ) {
     val viewModel: SettingsScreenViewModel = hiltViewModel()
-
     SettingsScreen(
-        onBack = onBack, navToNext = navToNext, logoutUser = {
-            viewModel.logoutUser()
-            popUntil(Screen.Login)
-        }
+        onBack = onBack,
+        navToNext = navToNext,
+        popUntil = popUntil
     )
 }
 
@@ -37,43 +36,96 @@ fun SettingsScreenRoute(
 private fun SettingsScreen(
     onBack: () -> Unit,
     navToNext: (Screen) -> Unit,
-    logoutUser: () -> Unit
+    popUntil: (Screen) -> Unit
 ) {
-    val context = LocalContext.current
     Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.White)
     ) {
-        Text("Settings", style = MaterialTheme.typography.titleLarge)
-        HorizontalDivider(modifier = Modifier.padding(vertical = 16.dp))
-        Text("Support", style = MaterialTheme.typography.titleMedium)
+        // AppBar
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(56.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                imageVector = Icons.Default.ArrowBack,
+                contentDescription = "Back",
+                tint = Color.Black,
+                modifier = Modifier
+                    .padding(start = 16.dp)
+                    .size(24.dp)
+                    .clickable { onBack() }
+            )
+            Spacer(modifier = Modifier.weight(1f))
+            Text(
+                text = "Settings",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.Black,
+                modifier = Modifier.align(Alignment.CenterVertically)
+            )
+            Spacer(modifier = Modifier.weight(1f))
+            Spacer(modifier = Modifier.width(40.dp)) // Sağda boşluk, simetri için
+        }
+        Spacer(modifier = Modifier.height(24.dp))
+        // Support Section
         Text(
-            "If you have any issues or need help, please contact our support team. We are here to assist you!",
-            modifier = Modifier.padding(vertical = 8.dp),
-            style = MaterialTheme.typography.bodyLarge
+            text = "Support",
+            fontSize = 15.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.Black,
+            modifier = Modifier.padding(start = 24.dp, bottom = 8.dp)
         )
-        HorizontalDivider(modifier = Modifier.padding(vertical = 16.dp))
-        Text("Contact Us", style = MaterialTheme.typography.titleMedium)
+        SettingsRow(text = "Support", onClick = { /* TODO */ })
+        SettingsRow(text = "Privacy Policy", onClick = { /* TODO */ })
+        Spacer(modifier = Modifier.height(24.dp))
+        // Location Section
         Text(
-            "Email: support@parkit.com",
-            modifier = Modifier.padding(vertical = 4.dp),
-            style = MaterialTheme.typography.bodyLarge
+            text = "Location",
+            fontSize = 15.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.Black,
+            modifier = Modifier.padding(start = 24.dp, bottom = 8.dp)
         )
-        CustomButton(text = "Send Email", onClick = {
-            val intent = Intent(Intent.ACTION_SENDTO).apply {
-                data = "mailto:support@androidbase.com".toUri()
-                putExtra(Intent.EXTRA_SUBJECT, "Support Request")
-            }
-            context.startActivity(intent)
-        })
-        HorizontalDivider(modifier = Modifier.padding(vertical = 16.dp))
-        CustomButton(text = "Logout", onClick = logoutUser)
+        SettingsRow(text = "Medina", onClick = { /* TODO */ })
     }
 }
 
-@Preview(showBackground = true)
 @Composable
-private fun PreviewScreen() {
-    SettingsScreen(onBack = {}, navToNext = {}, logoutUser = {})
+private fun SettingsRow(text: String, onClick: () -> Unit) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(48.dp)
+            .clickable { onClick() }
+            .padding(horizontal = 24.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            text = text,
+            fontSize = 15.sp,
+            fontWeight = FontWeight.Normal,
+            color = Color.Black,
+            modifier = Modifier.weight(1f)
+        )
+        Icon(
+            imageVector = Icons.Default.KeyboardArrowRight,
+            contentDescription = null,
+            tint = Color.Black,
+            modifier = Modifier.size(24.dp)
+        )
+    }
+}
+
+@androidx.compose.ui.tooling.preview.Preview(showBackground = true)
+@Composable
+private fun SettingsScreenPreview() {
+    SettingsScreen(
+        onBack = {},
+        navToNext = {},
+        popUntil = {}
+    )
 }
