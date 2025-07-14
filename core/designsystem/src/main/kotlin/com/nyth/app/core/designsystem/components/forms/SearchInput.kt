@@ -44,7 +44,7 @@ fun SearchInput(
     ) {
         Icon(
             imageVector = Icons.Default.Search,
-            contentDescription = "Search",
+            contentDescription = "Search.",
             tint = placeholderColor,
             modifier = Modifier.size(20.dp)
         )
