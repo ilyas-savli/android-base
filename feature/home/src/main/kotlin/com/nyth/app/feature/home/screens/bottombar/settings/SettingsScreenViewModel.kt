@@ -12,4 +12,6 @@ class SettingsScreenViewModel @Inject constructor(
     fun logoutUser() {
         authManager.logout()
     }
+
+    fun getCurrentUser() = authManager.currentUser
 }
