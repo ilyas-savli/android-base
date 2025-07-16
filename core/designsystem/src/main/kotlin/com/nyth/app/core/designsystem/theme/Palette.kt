@@ -6,101 +6,66 @@ import androidx.compose.ui.graphics.Color
 val LocalColorsPalette = staticCompositionLocalOf { BasePalette() }
 
 open class BasePalette {
-    val red50: Color = Color(color = 0xFFFFF3F4)
-    val red200: Color = Color(color = 0xFFE4B8B8)
-    val red400: Color = Color(color = 0xFFD95D54)
-    val red500: Color = Color(color = 0xFF9B382D)
-    val green50: Color = Color(color = 0xFFF2F8F2)
-    val green300: Color = Color(color = 0xFF439641)
-    val green400: Color = Color(color = 0xFF2AB0A1)
-    val gray50: Color = Color(color = 0xFFC7C6CB)
-    val gray100: Color = Color(color = 0xFFE4E4E4)
-    val gray200: Color = Color(color = 0xFFA0A1AB)
-    val gray300: Color = Color(color = 0xFF636469)
-    val gray400: Color = Color(color = 0xFF242731)
-    val white1: Color = Color(color = 0xFFFFFFFF).copy(alpha = 0.3f)
-    val black1: Color = Color(color = 0xFF000000).copy(alpha = 0.6f)
-    val black2: Color = Color(color = 0xFF000000).copy(alpha = 0.3f)
-    val redLive: Color = Color(color = 0xFFFF0000)
-    val greenLive: Color = Color(color = 0xFF2CCC00)
-    val productDetailBg: Color = Color(color = 0xFFF8F8F9)
-    val gray50New: Color = Color(color = 0xFFFFFFFF)
-    val productDetailComponentBorder: Color = Color(color = 0xFFF4F4F5)
-    val productDetailColorHeaderGray: Color = Color(color = 0xFF908E97)
-    val productDetailColorHeaderBlack: Color = Color(color = 0xFF22242A)
-    val productDetailIconWhite: Color = Color(color = 0x80FFFFFF)
-    val productDetailCampaignBorder: Color = Color(color = 0xFFE9E8EA)
-    val discountedPriceRed: Color = Color(color = 0xFFD95D54)
-    val passiveSize: Color = Color(color = 0xFFC7C6CB)
-    val customGray: Color = Color(0xFF393741)
-    val fontAccentPale: Color = Color(0xFF908E97)
-    val canvasAccentPale: Color = Color(0xFFF4F4F5)
-    val lightGray: Color = Color(color = 0xFFF8F8F9)
-    val borderGray: Color = Color(color = 0xFFE3E2E7)
-    val black100: Color = Color(0xFFF8F8F8)
-    val black200: Color = Color(0xFFF4F4F5)
-    val black300: Color = Color(0xFFE9E8EA)
-    val black400: Color = Color(0xFFC7C6CB)
-    val black500: Color = Color(0x79908E97)
-    val black600: Color = Color(0xFF585562)
-    val black700: Color = Color(0xFF4D4A58)
-    val black800: Color = Color(0xFF393741)
+    // Primary Colors
+    val primaryRed: Color = Color(0xFFDC0005) // AkYatırım Red
+    val primaryBlack: Color = Color(0xFF141414) // Stablex Black
+    val primaryWhite: Color = Color(0xFFFFFFFF) // AkYatırım White
+
+    // Secondary Colors
+    val secondaryGreen: Color = Color(0xFF59B167) // Green
+    val secondaryOrange: Color = Color(0xFFF66A47) // Orange
+    val secondaryBlack: Color = Color(0xFF1D1D1E) // Black Secondary
+    val tertiaryBlack: Color = Color(0xFF3A3A3A) // Black Tertiary
+
+    // Grays
+    val grayPrimary: Color = Color(0xFF4E4E4E) // Gray Primary
+    val graySecondary: Color = Color(0xFF6D6D6D) // Gray Secondary
+    val grayTertiary: Color = Color(0xFFBABABA) // Gray Tertiary
+    val grayFourth: Color = Color(0xFFE4E4E4) // Gray Fourth
+    val grayBackground: Color = Color(0xFFF5F5F5) // Background
+
+    // Gradients (as solid fallback)
+    val gradientBlack: Color = Color(0xFF191919) // Used in gradients
+    val gradientGray: Color = Color(0xFF131313) // Used in gradients
+
+    // Surface/Backgrounds
+    val surfaceDark: Color = Color(0xFF1D1D1E)
+    val surfaceLight: Color = Color(0xFFFFFFFF)
+    val surfaceGray: Color = Color(0xFFF5F5F5)
+
+    // Text Colors
+    val textPrimary: Color = Color(0xFF22242A)
+    val textSecondary: Color = Color(0xFF4E4E4E)
+    val textTertiary: Color = Color(0xFF6D6D6D)
+    val textOnPrimary: Color = Color(0xFFFFFFFF)
+    val textOnSecondary: Color = Color(0xFF141414)
+    val textDisabled: Color = Color(0xFF605F65)
+    val textHint: Color = Color(0x8A000000)
+
+    // Border/Divider
+    val borderDefault: Color = Color(0xFFE4E4E4)
+    val borderDark: Color = Color(0xFF3A3A3A)
+    val borderLight: Color = Color(0xFFFFFFFF)
+    val divider: Color = Color(0xFFE5E5E5)
+
+    // State/Feedback
+    val error: Color = Color(0xFFEA6669)
+    val warning: Color = Color(0xFFF66A47)
+    val success: Color = Color(0xFF59B167)
+    val info: Color = Color(0xFF5D5864)
+    val disabled: Color = Color(0xFF605F65)
+    val disabledBackground: Color = Color(0xFFBABABA)
+
+    // Misc
+    val green50: Color = Color(0xFFF2F8F2)
+    val green400: Color = Color(0xFF2AB0A1)
+    val gray100: Color = Color(0xFFE4E4E4)
+    val black2: Color = Color(0xFF000000).copy(alpha = 0.3f)
+    val greenLive: Color = Color(0xFF2CCC00)
     val blackDefault: Color = Color(0xFF22242A) // overlinePrimaryLight
-    val errorDark: Color = Color(0xFFC53030)
-    val errorDefault: Color = Color(0xFFFF1F1F)
-    val errorLight: Color = Color(0xFFF56565)
-    val successDark: Color = Color(0xFF38A169)
-    val successDefault: Color = Color(0xFF0ACA6E)
-    val pointTextFieldBorder: Color = Color(0xFFC4C4C4)
     val pdpVideoButton: Color = blackDefault // 0xFF22242A
     val searchBarVerticalDividerColor: Color = Color(0xFFE5E5E5)
-    val discountRed: Color = Color(0xFFD95D54)
-    val customCheckBoxUncheckedBackground: Color = Color(0xFFF8F8F9)
-    val customCheckBoxUncheckedBorder: Color = Color(0xFFC7C6CB)
-    val productDetailSizeOptionColorBlack: Color = Color(color = 0xFF22242A)
-    val productDetailSizeOptionColorGray: Color = Color(color = 0xFF908E97)
-    val productDetailSizeOptionColorLightGrey: Color = Color(color = 0xFFF8F8F9)
-    val productDetailSizeOptionColorErrorRed: Color = Color(color = 0xFFFF1F1F)
-    val textDefaultBlack = Color(color = 0xFF22242A)
-    val softGray: Color = Color(color = 0xFFE9E8EA)
-    val steelGray: Color = Color(color = 0xFF80858A)
-    val textGreen = Color(color = 0xFF0ACA6E)
-    val pureBlack: Color = Color(color = 0xFF000000)
-    val white: Color = Color(color = 0xFFFFFFFF)
-    val tileBackground: Color = Color(0xFFF5f5f5)
+    val white: Color = Color(0xFFFFFFFF)
     val black26: Color = Color(0x42000000)
-    val white60: Color = Color(0x99FFFFFF)
-    val darkGray: Color = Color(0xFF212121)
-    val mediumGray: Color = Color(0xFF757575)
-    val taupeGray: Color = Color(color = 0xFF605F66)
-    val dimGray: Color = Color(color = 0xFFBCBBC2)
-    val addAddress: Color = Color(0xFFF7F7F9)
-    val transparent: Color = Color(0x00FFFFFF)
-    val ordersListColorGray: Color = Color(color = 0xFF908E97)
-    val ordersListTextInputBackground: Color = Color(color = 0xFFF8F8F9)
-    val ordersListColorBlack: Color = Color(color = 0xFF22242A)
-    val ordersListFilterTextColor: Color = Color(0xFF393741)
-    val hintOfGray: Color = Color(color = 0xFFF6F6F6)
-    val stroke: Color = Color(color = 0xFFEAEAEA)
-    val strokeAlt: Color = Color(color = 0xFFE1E0E2)
-
-    val ordersListColorRed: Color = Color(color = 0xFFC53030)
-    val ordersListColorGreen: Color = Color(color = 0xFF38A169)
-    val transParentBlack: Color = Color(color = 0x80000000)
-
-    val scanGoBasket = Color(color = 0xFFFFEFE4)
-    val inputLabelColor = Color(color = 0xFF908E97)
-    val disabledColor = Color(color = 0xFF605F65)
-    val backgroundDimColor = Color(color = 0x80000000)
-    val canvasPrimary = Color(color = 0xFF908E96) // data get from Digital color meter
-    val borderColor = Color(color = 0xFFEFEEEE) // data get from Digital color meter
-    val benefitsLayerBg: Color = Color(color = 0xFFE4E3E1)
-
-    val orderSuccessDividerGreen: Color = Color(0xFFD7EAD7)
-    val inputHintColor = Color(color = 0x8A000000)
-
-    val giftPointBannerBackground = Color(0x1AFDA623)
-    val checkoutDefaultBackground = Color(0xFFF8F8F9)
-    val disabledButtonColor = Color(0xFFA1A1AB)
-    val sizeTableDividerColor = Color(0xFFE8E9ED)
+    val inputHintColor = Color(0x8A000000)
 }
