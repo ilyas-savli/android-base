@@ -9,7 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -21,6 +21,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.nyth.app.core.designsystem.R
@@ -44,13 +47,23 @@ private fun SplashScreen(
     navNext: (Screen) -> Unit,
     splashUiState: SplashUiState
 ) {
-    LaunchedEffect(key1 = splashUiState) {
-        if (splashUiState is SplashUiState.Success) {
-            if (splashUiState.isLoggedIn) {
-                navNext(Screen.NestedGraph)
-            } else {
-                navNext(Screen.Login)
+    val lifecycleOwner = LocalLifecycleOwner.current
+
+    DisposableEffect(splashUiState) {
+        val observer = LifecycleEventObserver { _, event ->
+            if (event == Lifecycle.Event.ON_RESUME) {
+                if (splashUiState is SplashUiState.Success) {
+                    if (splashUiState.isLoggedIn) {
+                        navNext(Screen.NestedGraph)
+                    } else {
+                        navNext(Screen.Login)
+                    }
+                }
             }
+        }
+        lifecycleOwner.lifecycle.addObserver(observer)
+        onDispose {
+            lifecycleOwner.lifecycle.removeObserver(observer)
         }
     }
 

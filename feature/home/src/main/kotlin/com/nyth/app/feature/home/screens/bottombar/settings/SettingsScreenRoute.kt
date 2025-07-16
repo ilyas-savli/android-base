@@ -36,7 +36,10 @@ fun SettingsScreenRoute(
     SettingsScreen(
         onBack = onBack,
         navToNext = navToNext,
-        popUntil = popUntil
+        logout = {
+            viewModel.logoutUser()
+            popUntil(Screen.Splash)
+        }
     )
 }
 
@@ -44,7 +47,7 @@ fun SettingsScreenRoute(
 private fun SettingsScreen(
     onBack: () -> Unit,
     navToNext: (Screen) -> Unit,
-    popUntil: (Screen) -> Unit
+    logout: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -99,8 +102,7 @@ private fun SettingsScreen(
             modifier = Modifier.padding(start = 24.dp, bottom = 8.dp)
         )
         SettingsRow(text = "Medina", onClick = { println("Medina clicked") })
-        Spacer(modifier = Modifier.weight(1f))
-        SettingsRow(text = "Logout", onClick = { popUntil(Screen.Login) })
+        SettingsRow(text = "Logout", onClick = logout)
     }
 }
 
@@ -136,6 +138,6 @@ private fun SettingsScreenPreview() {
     SettingsScreen(
         onBack = {},
         navToNext = {},
-        popUntil = {}
+        logout = {}
     )
 }
