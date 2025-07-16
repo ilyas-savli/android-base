@@ -6,7 +6,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
 import androidx.navigation3.runtime.entry
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberSavedStateNavEntryDecorator
@@ -30,7 +29,9 @@ fun RootGraph() {
         backStack = backstack, onBack = {
             backstack.removeLastOrNull()
         }, entryDecorators = listOf(
-            rememberSavedStateNavEntryDecorator(), rememberViewModelStoreNavEntryDecorator()
+            rememberSavedStateNavEntryDecorator(),
+            // If enable this: it will always store viewmodel state in the backstack
+            //rememberViewModelStoreNavEntryDecorator()
         ), entryProvider = entryProvider {
             entry<Screen.Splash> {
                 SplashScreenRoute(

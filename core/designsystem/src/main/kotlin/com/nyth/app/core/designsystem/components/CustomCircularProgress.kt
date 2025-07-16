@@ -39,7 +39,7 @@ private fun PreviewComponent() {
     Column {
         CustomCircularProgress(
             progress = 0.5f,
-            trackColor = LocalColorsPalette.current.disabledColor,
+            trackColor = LocalColorsPalette.current.disabled,
             fullColor = LocalColorsPalette.current.inputHintColor
         )
         CustomCircularProgress()
